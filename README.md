@@ -1,8 +1,8 @@
 # Renteez
 
-Online Apartment Renting Platform
+## Online Apartment Renting Platform
 
-## Team #12 - Web Project - Metropolia University
+Team #12 - Web Project - Metropolia University
 
 ---
 
