@@ -5,7 +5,7 @@ const router = express.Router();
 const UserDetailsController = require('../controllers/userDetailsController');
 
 // Define routes
-router.get('/:id', UserDetailsController.getUserById);
+router.get('/:id', UserDetailsController.getUserDetailById);
 router.delete('/:id', UserDetailsController.deleteUserById);
 router.put('/:id', UserDetailsController.changeDetails);
 

@@ -1,11 +1,11 @@
 // Sample user data array
-const about = "This is the about page!";
+const home = "This is the home page!";
 
-const getAbout = (req, res) => {
+const getHome = (req, res) => {
   // Respond with the 
-  res.json(about);
+  res.json(home);
 };
 
 module.exports = {
-  getAbout
+  getHome
 };
