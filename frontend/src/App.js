@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 // pages & components
 import Home from './pages/Home'
 import Create from './pages/Create'
-import BlogDetails from './pages/BlogDetails'
+import Browse from './pages/Browse'
+import Offer from './pages/Offer'
 import Navbar from './components/Navbar'
 
 function App() {
@@ -19,12 +20,16 @@ function App() {
               element={<Home />}
             />
             <Route
+              path="/browse"
+              element={<Browse />}
+            />
+            <Route
               path="/create"
               element={<Create />}
             />
             <Route
-              path="/blogs/:id"
-              element={<BlogDetails />}
+              path="/offer/:id"
+              element={<Offer />}
             />
           </Routes>
         </div>

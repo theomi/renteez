@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
-import BlogList from "./BlogList";
+import BlogList from "./Browse";
+import house from "../img/home-house.png"
 
 import { REACT_APP_API_URL } from '../utils/apiConfig';
 
 const apiUrl = `${REACT_APP_API_URL}/api/blogs`;
 
 const Home = () => {
-  const [blogs, setBlogs] = useState(null)
+  /*const [blogs, setBlogs] = useState(null)
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -19,15 +20,18 @@ const Home = () => {
     }
 
     fetchBlogs()
-  }, [])
+  }, [])*/
 
   return (
     <div className="home">
-      { blogs && <BlogList blogs={blogs} /> }
+      <h2 className="title-second">Welcome to Renteez</h2>
+      <h1 className="title">A quick and easy way<br />to rent student apartments</h1>
+      <a className="button" href="test">Start Browsing</a>
+      <img className="home-picture" src={house} alt="house" />
     </div>
   )
 }
 
- 
+
 
 export default Home
