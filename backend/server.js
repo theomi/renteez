@@ -1,6 +1,10 @@
 const express = require('express');
+const connectDB = require('./config/db');
+const middlewareCustom = require('./middleware/middlewareCustom');
 const app = express();
-const port = 4000;
+const port=process.env.PORT || 3001;
+connectDB();
+
 
 const aboutRouter = require('./routers/about');
 const browseRouter = require('./routers/browse');
@@ -14,6 +18,10 @@ const userDetailsRouter = require('./routers/userDetails');
 const usersRouter = require('./routers/users');
 
 app.use(express.json());
+
+app.use(middlewareCustom.requestLogger);
+app.use(middlewareCustom.unknownEndpoint);
+app.use(middlewareCustom.errorHandler)
 
 
 // Configure user routes
