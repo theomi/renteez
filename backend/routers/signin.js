@@ -1,10 +1,11 @@
 const express = require('express');
+const {
+    signinForm
+  } = require('../controllers/signinController')
+
 const router = express.Router();
 
-// Import user controller
-const SigninController = require('../controllers/signinController');
-
-// Define routes
-router.post('/',SigninController.signinForm);
+// POST for signin
+router.post('/', signinForm);
 
 module.exports = router;

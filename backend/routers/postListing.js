@@ -1,13 +1,20 @@
 const express = require('express');
+const {
+    addListing,
+    getAllListings,
+    deleteListing,
+    changeListingDetails
+  } = require('../controllers/postListingController')
+
 const router = express.Router();
 
-// Import user controller
-const PostListingsController = require('../controllers/postListingController');
-
-// Define routes
-router.post('/', PostListingsController.addListing);
-router.get('/', PostListingsController.getAllListings);
-router.delete('/:id', PostListingsController.deleteListing);
-router.put('/:id', PostListingsController.changeListingDetails);
+// POST a listing
+router.post('/', addListing);
+// GET all listing
+router.get('/', getAllListings);
+// DELETE a listing
+router.delete('/:id', deleteListing);
+// PUT a listing
+router.put('/:id', changeListingDetails);
 
 module.exports = router;

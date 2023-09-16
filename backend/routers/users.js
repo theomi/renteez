@@ -1,11 +1,11 @@
 const express = require('express');
+const {
+    getUserById
+  } = require('../controllers/usersController')
+
 const router = express.Router();
 
-// Import user controller
-const UserController = require('../controllers/usersController');
-
-// Define routes
-router.get('/:id', UserController.getUserById);
-//router.get('userContact/:id', UserController.getContact);
+// GET user by id
+router.get('/:id', getUserById);
 
 module.exports = router;

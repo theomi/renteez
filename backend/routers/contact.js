@@ -1,10 +1,11 @@
 const express = require('express');
+const {
+    getContact
+  } = require('../controllers/contactController')
+
 const router = express.Router();
 
-// Import user controller
-const ContactController = require('../controllers/contactController');
-
-// Define routes
-router.get('/', ContactController.getContact);
+// GET company contact
+router.get('/', getContact);
 
 module.exports = router;

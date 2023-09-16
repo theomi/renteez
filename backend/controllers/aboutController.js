@@ -2,8 +2,12 @@
 const about = "This is the about page!";
 
 const getAbout = (req, res) => {
-  // Respond with the 
-  res.json(about);
+  try{
+    res.json(about);
+  } catch (err){
+    res.status(500).json({ message: "Page not found" })
+  }
+  
 };
 
 module.exports = {

@@ -1,59 +1,34 @@
-// Sample user data array
-const listings = [
-    {
-        id: 1,
-        Name: "Agrin",
-        Occupation: "Student"
-    },
-    {
-        id: 2,
-        Name: "Theo",
-        Occupation: "Student"
-    },
-    {
-        id: 3,
-        Name: "Muhammad",
-        Occupation: "Student"
-    },
-    {
-        id: 4,
-        Name: "Yadullah",
-        Occupation: "Student"
-    }
-];
-
-let count = 4;
+const Listing = require('../models/listingModel')
+const mongoose = require('mongoose')
 
 // Controller methods
-const addListing = (req, res) => {
-  const { Name, Occupation } = req.body;
+const addListing = async (req, res) => {
+  const { Title, Description, Picture1, Picture2, Picture3, Picture4, Picture5, Address, PostalCode, City, 
+    Surface, RoomCOunt, Rent, Transport, Elevator, Internet, Electricity, Water, Parking, Disability } = req.body;
 
   // Check if name and bio properties are present in the request body
-  if (!Name || !Occupation) {
-    return res.status(400).json({ message: "Please provide name and bio for the user" });
+  if (!Title || !Description || !Picture1 || !Address || !PostalCode || !City || !Surface || !RoomCOunt || !Rent ||
+    !Transport || !Elevator || !Internet || !Electricity || !Water || !Parking || !Disability ) {
+    return res.status(400).json({ message: "Please provide the details of your listing" });
   }
-count++;
-
-  // Create a new user object
-  const newListing = {
-    id: count,
-    Name,
-    Occupation
-  };
-
-  // Add the new user to the users array
-  listings.push(newListing);
-
-  // Respond with the newly created user and HTTP status 201 (Created)
-  res.status(201).json(newListing);
+  try {
+    const listing = await Listing.create({ Title, Description, Picture1, Picture2, Picture3, Picture4, Picture5, Address, PostalCode, City, 
+      Surface, RoomCOunt, Rent, Transport, Elevator, Internet, Electricity, Water, Parking, Disability })
+    res.status(201).json(listings);
+  } catch (err) {
+    res.status(400).json({ error: err.message })
+  }
 };
 
 
-const getAllListings = (req, res) => {
-  // Respond with the array of users
-  res.json(listings);
+const getAllListings = async (req, res) => {
+  const listings = await Listing.find({}).sort({createdAt: -1})
+  try{
+    res.status(200).json(home, listings);
+  } catch (err) {
+    res.status(400).json({error: err.message})
+  }
 };
-
 
 
 const deleteListing = (req, res) => {

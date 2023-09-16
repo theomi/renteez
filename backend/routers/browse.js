@@ -1,10 +1,11 @@
 const express = require('express');
+const {
+    getFiltered
+  } = require('../controllers/browseController')
+
 const router = express.Router();
 
-// Import user controller
-const BrowseController = require('../controllers/browseController');
-
-// Define routes
-router.get('/', BrowseController.getFiltered);
+// GET all filtered listings
+router.get('/', getFiltered);
 
 module.exports = router;

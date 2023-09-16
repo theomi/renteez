@@ -2,8 +2,12 @@
 const contact = "We are a startup with no contact details!";
 
 const getContact = (req, res) => {
-  // Respond with the 
-  res.json(contact);
+  try{
+    res.json(contact);
+  } catch (err) {
+    res.status(500).json({ message: "Page not found" })
+  }
+  
 };
 
 module.exports = {
