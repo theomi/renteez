@@ -225,3 +225,27 @@ hr {
   font-weight: bold;
   color: #949494;
 }
+
+.offer-picture {
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+.offer h2, .offer h3 {
+  font-weight: normal;
+}
+
+.offer p {
+  margin-top: 15px;
+  line-height: 1.5;
+}
+
+.login-form, .register-form {
+margin-top: 20px;
+}
+
+.form-title {
+  text-align: center;
+  font-weight: lighter;
+  color: #949494;
+}

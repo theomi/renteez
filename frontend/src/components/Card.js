@@ -13,7 +13,7 @@ const Navbar = () => {
         <div className="offer-card">
             <img className="offer-picture" src={preview} alt="offer" />
             <div className="offer-details">
-                <Link to={`/blogs/rr`}>
+                <Link to={`/offer/1`}>
                     <h3>Wonderful apartment in central Helsinki with balcony</h3>
                     <p className="offer-address">{icon_address} Pohjoisesplanadi 32, Helsinki</p>
                     <p className="offer-infos">{icon_surface} 46,2 m²{icon_rooms} 2½ rooms {icon_transports} ~350m</p>

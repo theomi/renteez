@@ -6,6 +6,8 @@ import Create from './pages/Create'
 import Browse from './pages/Browse'
 import Offer from './pages/Offer'
 import Navbar from './components/Navbar'
+import Login from './pages/Login'
+import Register from './pages/Register'
 
 function App() {
 
@@ -30,6 +32,14 @@ function App() {
             <Route
               path="/offer/:id"
               element={<Offer />}
+            />
+            <Route
+              path="/login"
+              element={<Login />}
+            />
+            <Route
+              path="/register"
+              element={<Register />}
             />
           </Routes>
         </div>
