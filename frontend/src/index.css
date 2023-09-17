@@ -7,6 +7,8 @@
   color: #333;
 }
 
+body {}
+
 .navbar {
   padding: 20px;
   display: flex;
@@ -14,10 +16,6 @@
   max-width: 100%;
   margin: 0 auto;
   border-bottom: 1px solid #f2f2f2;
-}
-
-.navbar h1 {
-  color: #f1356d;
 }
 
 .navbar .nav-right {
@@ -28,10 +26,7 @@
   margin-left: 16px;
   text-decoration: none;
   padding: 6px;
-}
-
-.navbar a:hover {
-  color: #f1356d;
+  color: #949494;
 }
 
 .content {
@@ -50,26 +45,31 @@
 
 .offer-address {
   color: #949494;
+  font-weight: normal;
+}
+
+.offer-address path {
+  color: #949494;
 }
 
 .offer-infos {
+  color: #c6c6c6;
+  font-weight: normal;
+}
+
+.offer-infos path {
   color: #c6c6c6;
 }
 
 .offer-price {
   color: #E13737;
   font-weight: bolder;
-  font-size: larger;
 }
 
 .offer-price .charges {
   font-weight: normal;
   color: #949494;
-  font-size: medium;
-}
-
-.offer-picture {
-  max-width: 100%;
+  font-size: x-large;
 }
 
 .offer-details {
@@ -91,13 +91,6 @@
   text-decoration: none;
 }
 
-/* blog details page */
-.blog-details h2 {
-  font-size: 20px;
-  color: #f1356d;
-  margin-bottom: 10px;
-}
-
 .blog-details div {
   margin: 20px 0;
 }
@@ -113,10 +106,30 @@
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
-  margin-top: 32px;
   display: inline-block;
   font-size: large;
   font-weight: bold;
+}
+
+.button-disabled {
+  background: #eaeaea;
+  color: #fff;
+  border: 0;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 5px;
+  cursor: not-allowed;
+  text-decoration: none;
+  display: inline-block;
+  font-size: large;
+  font-weight: bold;
+}
+
+.button path,
+.button-disabled path {
+  color: #fff;
 }
 
 /* create new blog form */
@@ -198,8 +211,6 @@ hr {
   margin-bottom: 20px;
 }
 
-
-
 .input {
   width: 100%;
   padding: 10px;
@@ -228,11 +239,8 @@ hr {
 
 .offer-picture {
   max-width: 100%;
-  border-radius: 5px;
-}
-
-.offer h2, .offer h3 {
-  font-weight: normal;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 }
 
 .offer p {
@@ -240,12 +248,84 @@ hr {
   line-height: 1.5;
 }
 
-.login-form, .register-form {
-margin-top: 20px;
+.login-form,
+.register-form {
+  margin-top: 20px;
 }
 
 .form-title {
   text-align: center;
   font-weight: lighter;
   color: #949494;
+}
+
+.fields-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* Three equal-width columns */
+  gap: 10px;
+  /* Adjust the gap between columns as needed */
+}
+
+.form-container {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.offer-detail-picture {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.contact-info {
+  border: 0.5px solid #c6c6c6;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.contact-info h3,
+.contact-info h3 path {
+  color: #949494;
+  font-weight: normal;
+}
+
+.mt-16 {
+  margin-top: 16px;
+}
+
+.mt-32 {
+  margin-top: 32px;
+}
+
+.mb-16 {
+  margin-bottom: 16px;
+}
+
+.mb-32 {
+  margin-bottom: 32px;
+}
+
+.ml-16 {
+  margin-left: 16px;
+}
+
+.mr-16 {
+  margin-right: 16px;
+}
+
+.hidden {
+  display: none;
+}
+
+.offer-text {
+  text-align: justify;
+}
+
+.offer-card .offer-price {
+  font-size: x-large;
+}
+
+.offer-card .offer-price .charges {
+  font-size: medium;
 }
