@@ -26,7 +26,7 @@ const Home = () => {
     <div className="home">
       <h2 className="title-second">Welcome to Renteez</h2>
       <h1 className="title">A quick and easy way<br />to rent student apartments</h1>
-      <a className="button" href="test">Start Browsing</a>
+      <a className="button mt-32" href="browse">Start Browsing</a>
       <img className="home-picture" src={house} alt="house" />
     </div>
   )
