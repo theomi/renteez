@@ -1,42 +1,51 @@
-// Sample user data array
-const users = [
-  {
-    id: 1,
-    Name: "Agrin",
-    Occupation: "Student"
-},
-{
-    id: 2,
-    Name: "Theo",
-    Occupation: "Student"
-},
-{
-    id: 3,
-    Name: "Muhammad",
-    Occupation: "Student"
-},
-{
-    id: 4,
-    Name: "Yadullah",
-    Occupation: "Student"
-}
-];
+const User = require("../models/userModel");
+const mongoose = require("mongoose");
 
-const getUserById = (req, res) => {
-  const id  = parseInt(req.params.id);
-
-  // Find the user with the specified ID
-  const user = users.find(u => u.id === id);
-
-  // If the user is not found, respond with a 404 status code and a message
-  if (!user) {
-    return res.status(404).json({ message: "The user with the specified ID does not exist" });
+const getUserById = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such listings found" });
   }
 
-  // Respond with the user object
-  res.json(user);
+  try {
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json({ error: "listing data could not be retrieved" });
+  }
+};
+
+const deleteUserById = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "No such user found" });
+  }
+  try {
+    const user = await User.findByIdAndDelete(id);
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+const changeDetails = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "No such listing found" });
+  }
+  try {
+    const user = await User.findOneAndUpdate({ _id: id }, req.body, {
+      new: true,
+      overwrite: true,
+    });
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 };
 
 module.exports = {
-  getUserById
+  getUserById,
+  deleteUserById,
+  changeDetails,
 };

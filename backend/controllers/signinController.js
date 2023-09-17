@@ -1,53 +1,41 @@
-const signin = [
-    {
-        id: 1,
-        Name: "Agrin",
-        Password: "Student"
-    },
-    {
-        id: 2,
-        Name: "Theo",
-        Password: "Student"
-    },
-    {
-        id: 3,
-        Name: "Muhammad",
-        Password: "Student"
-    },
-    {
-        id: 4,
-        Name: "Yadullah",
-        Password: "Student"
-    }
-];
+const User = require("../models/userModel");
+const mongoose = require("mongoose");
 
-let count = 4;
+const signinForm = async (req, res) => {
+  const { email, password } = req.body;
 
-// Controller methods
-const signinForm = (req, res) => {
-  const { Name, Password } = req.body;
-
-  // Check if name and bio properties are present in the request body
-  if (!Name || !Password) {
-    return res.status(400).json({ message: "Please provide name and bio for the user" });
+  // Check if username and password properties are present in the request body
+  if (!email || !password) {
+    return res
+      .status(400)
+      .json({ message: "Username and password are required" });
   }
-count++;
 
-  // Create a new user object
-  const signinData = {
-    id: count,
-    Name,
-    Password
-  };
+  try {
+    // Find the user by username
+    const user = await User.findOne({ email });
 
-  // Add the new user to the users array
-  signin.push(signinData);
+    if (!user) {
+      return res.status(401).json({ message: "User not found" });
+    }
 
-  // Respond with the newly created user and HTTP status 201 (Created)
-  res.status(201).json(signinData);
+    // Compare the provided password with the stored password hash
+    //const passwordMatch = await user.comparePassword(password);
+
+    if (password != user.password) {
+      return res.status(401).json({ message: "Incorrect password" });
+    }
+
+    // If the password is correct, you can generate an authentication token (JWT) here
+    //const token = generateAuthToken(user); // Implement this function to generate a token
+
+    // Respond with the token and any other user-related data you want to send
+    res.status(200).json({ /*token, */ user: user.toJSON() });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
-
 module.exports = {
-    signinForm,
-  };
+  signinForm,
+};
