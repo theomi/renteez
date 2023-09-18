@@ -1,6 +1,7 @@
 require("dotenv").config();
 const connectDB = require("./config/db");
 const express = require("express");
+const cors = require('cors');
 
 const listingRouter = require("./routers/listing");
 const signinRouter = require("./routers/signin");
@@ -12,6 +13,8 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 connectDB();
+
+app.use(cors());
 
 app.use(express.json());
 

@@ -15,7 +15,7 @@ const addListing = async (req, res) => {
     postalCode,
     city,
     surface,
-    roomCOunt,
+    roomCount,
     rent,
     transport,
     elevator,
@@ -35,7 +35,7 @@ const addListing = async (req, res) => {
     !postalCode ||
     !city ||
     !surface ||
-    !roomCOunt ||
+    !roomCount ||
     !rent ||
     !transport ||
     !elevator ||
