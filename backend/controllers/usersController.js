@@ -11,7 +11,7 @@ const getUserById = async (req, res) => {
   try {
     res.status(200).json(user);
   } catch (err) {
-    res.status(500).json({ error: "listing data could not be retrieved" });
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -24,7 +24,7 @@ const deleteUserById = async (req, res) => {
     const user = await User.findByIdAndDelete(id);
     res.status(200).json(user);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -40,7 +40,7 @@ const changeDetails = async (req, res) => {
     });
     res.status(200).json(user);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(500).json({ error: err.message });
   }
 };
 

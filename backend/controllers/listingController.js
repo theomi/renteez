@@ -97,7 +97,7 @@ const getDetailsById = async (req, res) => {
   try {
     res.status(200).json(listing);
   } catch (err) {
-    res.status(500).json({ error: "listing data could not be retrieved" });
+    res.status(500).json({ error: err.message });
   }
 };
 
