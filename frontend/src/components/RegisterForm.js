@@ -7,6 +7,7 @@ const icon_lock = <FontAwesomeIcon icon={faLock} />
 const RegisterForm = () => {
     return (
         <div className='form-container'>
+
             <form method="post" className="register-form">
 
                 <div className="fields-2">
@@ -28,6 +29,11 @@ const RegisterForm = () => {
                 <div>
                     <label htmlFor='password'>Password</label>
                     <input id='password' type="password" className='input' placeholder='••••••••' required></input>
+                </div>
+
+                <div>
+                    <label htmlFor='phone'>Phone</label>
+                    <input id='phone' type="tel" className='input' placeholder='+358' required></input>
                 </div>
                 <button className="button">{icon_lock} Register</button>
             </form>

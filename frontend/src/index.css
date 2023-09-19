@@ -329,3 +329,16 @@ hr {
 .offer-card .offer-price .charges {
   font-size: medium;
 }
+
+.banner {
+  border: 1px solid red;
+  background-color: lightcoral;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.input-error {
+  border: 0.5px solid #E13737;
+  color: #E13737;
+}
