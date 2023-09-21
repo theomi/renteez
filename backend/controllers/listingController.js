@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 // Controller methods
 const addListing = async (req, res) => {
+  //const userID = req.User._id;
   const {
     title,
     description,
@@ -71,6 +72,7 @@ const addListing = async (req, res) => {
       water,
       parking,
       disability,
+      // createdBy: userID,
     });
     res.status(201).json(listing);
   } catch (err) {

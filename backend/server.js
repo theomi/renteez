@@ -1,7 +1,9 @@
 require("dotenv").config();
 const connectDB = require("./config/db");
 const express = require("express");
-const cors = require('cors');
+const cors = require("cors");
+//const crypto = require("crypto");
+//const authenticateToken = require("./middleware/authentication");
 
 const listingRouter = require("./routers/listing");
 const signinRouter = require("./routers/signin");
@@ -10,7 +12,10 @@ const usersRouter = require("./routers/users");
 
 const middlewareCustom = require("./middleware/middlewareCustom");
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
+/*const secretKey =
+  process.env.JWT_SECRET || crypto.randomBytes(32).toString("hex");
+console.log(secretKey);*/
 
 connectDB();
 

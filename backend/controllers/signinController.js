@@ -1,5 +1,7 @@
 const User = require("../models/userModel");
+const auth = require("../middleware/authentication");
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const signinForm = async (req, res) => {
   const { email, password } = req.body;
@@ -19,20 +21,21 @@ const signinForm = async (req, res) => {
       return res.status(401).json({ message: "User not found" });
     }
 
-    // Compare the provided password with the stored password hash
-    //const passwordMatch = await user.comparePassword(password);
-
-    if (password != user.password) {
+    const comparePasswords = await bcrypt.compare(password, user.password);
+    if (!comparePasswords) {
       return res.status(401).json({ message: "Incorrect password" });
     }
 
+    const userObject = {
+      _id: user._id,
+    };
     // If the password is correct, you can generate an authentication token (JWT) here
-    //const token = generateAuthToken(user); // Implement this function to generate a token
+    const token = auth.generateAuthToken(userObject); // Implement this function to generate a token
 
     // Respond with the token and any other user-related data you want to send
-    res.status(200).json({ /*token, */ user: user.toJSON() });
+    res.status(200).json({ token, user: user.toJSON() });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: err.message });
   }
 };
 
