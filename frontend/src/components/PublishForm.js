@@ -5,14 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { REACT_APP_API_URL } from '../utils/apiConfig';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 
-const apiUrl = `${REACT_APP_API_URL}/api/signup`;
+const apiUrl = `${REACT_APP_API_URL}/api/`;
 
 
 const icon_lock = <FontAwesomeIcon icon={faLock} />
 const icon_warning = <FontAwesomeIcon icon={faExclamationTriangle} />
 
 
-const RegisterForm = () => {
+const PublishForm = () => {
     const [title, setTitle] = useState('');
     const [first_name, setFirstName] = useState('');
     const [last_name, setLastName] = useState('');
@@ -26,11 +26,11 @@ const RegisterForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const registerInfo = { title,first_name, last_name, email, password, phone };
+        const publishInfo = { title,first_name, last_name, email, password, phone };
 
         const response = await fetch(apiUrl, {
             method: 'POST',
-            body: JSON.stringify(registerInfo),
+            body: JSON.stringify(publishInfo),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -57,12 +57,8 @@ const RegisterForm = () => {
                 <div className="fields-2">
                 <div>
                     <label htmlFor='title'>Title</label>
-                    <select className='input' id='rentPrice' name='rentPrice' value={title}
-                        onChange={(e) => setTitle(e.target.value)} required>
-                        <option value='' disabled selected>Select...</option>
-                        <option value='mr'>Mr</option>
-                        <option value='ms'>Ms</option>
-                    </select>
+                    <input id='userName' type="text" className='input' placeholder='Describe your offer' required value={title}
+                        onChange={(e) => setTitle(e.target.value)}></input>
                 </div>
                     <div>
                         <label htmlFor='userName'>First name</label>
@@ -100,4 +96,4 @@ const RegisterForm = () => {
     );
 }
 
-export default RegisterForm;
+export default PublishForm;

@@ -38,7 +38,7 @@ const LoginForm = () => {
             setHasError(true);
         }
         if (response.ok) {
-            navigate('/');
+            navigate('/profile');
         }
 
     }

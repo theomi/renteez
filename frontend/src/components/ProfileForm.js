@@ -5,14 +5,16 @@ import { useNavigate } from "react-router-dom";
 import { REACT_APP_API_URL } from '../utils/apiConfig';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 
-const apiUrl = `${REACT_APP_API_URL}/api/signup`;
+const apiUrl = `${REACT_APP_API_URL}/api/`;
 
 
-const icon_lock = <FontAwesomeIcon icon={faLock} />
+
 const icon_warning = <FontAwesomeIcon icon={faExclamationTriangle} />
 
 
-const RegisterForm = () => {
+
+
+const SearchForm = () => {
     const [title, setTitle] = useState('');
     const [first_name, setFirstName] = useState('');
     const [last_name, setLastName] = useState('');
@@ -23,38 +25,12 @@ const RegisterForm = () => {
     const [hasError, setHasError] = useState(false);
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
 
-        const registerInfo = { title,first_name, last_name, email, password, phone };
-
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            body: JSON.stringify(registerInfo),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        const json = await response.json();
-        setErrorMessage(json.message);
-
-        if (!response.ok) {
-            setHasError(true);
-        }
-        if (response.ok) {
-            navigate('/profile');
-        }
-
-    }
     return (
-        <div className='form-container'>
+        <div>
+            <form className="search-form">
 
-            {hasError ? <div className="banner mt-16">{icon_warning} {errorMessage}</div> : ""}
-
-
-            <form method="post" className="register-form" onSubmit={handleSubmit}>
-
-                <div className="fields-2">
+            
                 <div>
                     <label htmlFor='title'>Title</label>
                     <select className='input' id='rentPrice' name='rentPrice' value={title}
@@ -75,7 +51,7 @@ const RegisterForm = () => {
                         <input id='lastName' type="text" className='input' placeholder='Wick' required value={last_name}
                         onChange={(e) => setLastName(e.target.value)}></input>
                     </div>
-                </div>
+               
 
                 <div>
                     <label htmlFor='emailAddress'>Email Address</label>
@@ -94,10 +70,10 @@ const RegisterForm = () => {
                     <input id='phone' type="tel" className='input' placeholder='+358' required value={phone}
                         onChange={(e) => setPhone(e.target.value)}></input>
                 </div>
-                <button className="button">{icon_lock} Register</button>
+                <button className="button"> Update</button>
             </form>
         </div>
     );
 }
 
-export default RegisterForm;
+export default SearchForm;
