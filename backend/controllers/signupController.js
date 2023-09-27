@@ -1,28 +1,27 @@
-const User = require("../models/userModel");
+const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const User = require("../models/userModel");
+
+const createToken = (_id) => {
+  return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "3d" });
+};
 
 // Controller methods
-const createUser = async (req, res) => {
+const createUser = async (req, res, next) => {
   const { title, first_name, last_name, email, password, phone } = req.body;
-  if (!title || !first_name || !last_name || !email || !password) {
-    return res
-      .status(400)
-      .json({ message: "Please provide the complete info" });
-  }
+
   try {
-    const salt = await bcrypt.genSalt(13);
-    const hashedPassword = await bcrypt.hash(password, salt);
-    console.log(hashedPassword);
-    const user = await User.create({
+    const user = await User.signup(
       title,
       first_name,
       last_name,
       email,
-      password: hashedPassword,
-      phone,
-    });
-    res.status(201).json(user);
+      password,
+      phone
+    );
+    const token = createToken(user._id);
+    res.status(201).json({ message: "User registered successfully", token });
+    next();
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
