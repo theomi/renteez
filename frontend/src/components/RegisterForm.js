@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSignup } from "../hooks/useSignup"
 import { REACT_APP_API_URL } from '../utils/apiConfig';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 
@@ -19,61 +20,45 @@ const RegisterForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [phone, setPhone] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const [hasError, setHasError] = useState(false);
     const navigate = useNavigate();
+    const { signup, error, isLoading } = useSignup()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const registerInfo = { title,first_name, last_name, email, password, phone };
+        const signupInfo = { title, first_name, last_name, email, password, phone };
 
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            body: JSON.stringify(registerInfo),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        const json = await response.json();
-        setErrorMessage(json.message);
-
-        if (!response.ok) {
-            setHasError(true);
-        }
-        if (response.ok) {
-            navigate('/profile');
-        }
+        await signup(signupInfo)
 
     }
     return (
         <div className='form-container'>
 
-            {hasError ? <div className="banner mt-16">{icon_warning} {errorMessage}</div> : ""}
+            {error && <div className="banner mt-16">{icon_warning} {error}</div>}
 
 
             <form method="post" className="register-form" onSubmit={handleSubmit}>
 
                 <div className="fields-2">
-                <div>
-                    <label htmlFor='title'>Title</label>
-                    <select className='input' id='rentPrice' name='rentPrice' value={title}
-                        onChange={(e) => setTitle(e.target.value)} required>
-                        <option value='' disabled selected>Select...</option>
-                        <option value='mr'>Mr</option>
-                        <option value='ms'>Ms</option>
-                    </select>
-                </div>
+                    <div>
+                        <label htmlFor='title'>Title</label>
+                        <select className='input' id='rentPrice' name='rentPrice' value={title}
+                            onChange={(e) => setTitle(e.target.value)} required>
+                            <option value='' disabled selected>Select...</option>
+                            <option value='mr'>Mr</option>
+                            <option value='ms'>Ms</option>
+                        </select>
+                    </div>
                     <div>
                         <label htmlFor='userName'>First name</label>
                         <input id='userName' type="text" className='input' placeholder='John' required value={first_name}
-                        onChange={(e) => setFirstName(e.target.value)}></input>
-                    
+                            onChange={(e) => setFirstName(e.target.value)}></input>
+
                     </div>
                     <div>
                         <label htmlFor='lastName'>Last name</label>
                         <input id='lastName' type="text" className='input' placeholder='Wick' required value={last_name}
-                        onChange={(e) => setLastName(e.target.value)}></input>
+                            onChange={(e) => setLastName(e.target.value)}></input>
                     </div>
                 </div>
 
@@ -94,7 +79,7 @@ const RegisterForm = () => {
                     <input id='phone' type="tel" className='input' placeholder='+358' required value={phone}
                         onChange={(e) => setPhone(e.target.value)}></input>
                 </div>
-                <button className="button">{icon_lock} Register</button>
+                <button disabled={isLoading} className="button">{icon_lock} Register</button>
             </form>
         </div>
     );
