@@ -74,7 +74,6 @@ const addListing = async (req, res, next) => {
       createdBy: userId,
     });
     res.status(201).json(listing);
-    next();
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -84,7 +83,6 @@ const getAllListings = async (req, res, next) => {
   try {
     const listings = await Listing.find({}).sort({ createdAt: -1 });
     res.status(200).json(listings);
-    next();
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -95,7 +93,6 @@ const getAllUserListings = async (req, res, next) => {
     const createdBy = req.user._id;
     const listings = await Listing.find({ createdBy }).sort({ createdAt: -1 });
     res.status(200).json(listings);
-    next();
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -112,7 +109,6 @@ const getDetailsById = async (req, res) => {
       return res.status(404).json({ message: "No such listing found" });
     }
     res.status(200).json(listing);
-    next();
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -136,6 +132,7 @@ const getFiltered = async (req, res) => {
 
   try {
     const filter = {};
+
     if (postalCode) {
       filter.postalCode = postalCode;
     }
@@ -145,7 +142,6 @@ const getFiltered = async (req, res) => {
     if (surface && !isNaN(surface)) {
       filter.surface = { $gt: parseFloat(surface) };
     }
-
     if (roomCount && !isNaN(roomCount)) {
       filter.roomCount = { $lt: parseInt(roomCount) };
     }
@@ -155,31 +151,32 @@ const getFiltered = async (req, res) => {
     if (transport && !isNaN(transport)) {
       filter.transport = { $lt: parseInt(transport) };
     }
-    if (elevator) {
+    if (elevator !== undefined) {
       filter.elevator = elevator;
     }
-    if (internet) {
+    if (internet !== undefined) {
       filter.internet = internet;
     }
-    if (electricity) {
+    if (electricity !== undefined) {
       filter.electricity = electricity;
     }
-    if (water) {
+    if (water !== undefined) {
       filter.water = water;
     }
-    if (parking) {
+    if (parking !== undefined) {
       filter.parking = parking;
     }
-    if (disability) {
+    if (disability !== undefined) {
       filter.disability = disability;
     }
-
+    console.log(filter);
+    // Perform the query with the constructed filter.
     const query = Listing.find(filter).sort({ createdAt: -1 });
 
     const filteredListings = await query.exec();
 
+    // Send the filtered listings as a response.
     res.status(200).json(filteredListings);
-    next();
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -188,12 +185,11 @@ const getFiltered = async (req, res) => {
 const deleteListing = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ error: "No such listing found" });
+    return res.status(400).json({ message: "No such listing found" });
   }
   try {
     const listing = await Listing.findByIdAndDelete(id);
     res.status(200).json({ message: id + " has been deleted" });
-    next();
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -214,7 +210,6 @@ const changeListingDetails = async (req, res) => {
       overwrite: true,
     });
     res.status(200).json(listing);
-    next();
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

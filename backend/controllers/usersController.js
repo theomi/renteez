@@ -14,7 +14,6 @@ const getUserById = async (req, res, next) => {
     }
 
     res.status(200).json(user);
-    next();
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -39,7 +38,6 @@ const deleteUserById = async (req, res, next) => {
         deletedUser.last_name +
         " has been deleted",
     });
-    next();
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -60,11 +58,9 @@ const changeDetails = async (req, res, next) => {
       new: true,
       overwrite: true,
     });
-    res
-      .status(200)
-      .json({
-        message: "Details for " + updatedUser.last_name + " has been updated",
-      });
+    res.status(200).json({
+      message: "Details for " + updatedUser.last_name + " has been updated",
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
