@@ -2,8 +2,8 @@ const Listing = require("../models/listingModel");
 const mongoose = require("mongoose");
 
 // Controller methods
-const addListing = async (req, res) => {
-  //const userID = req.User._id;
+const addListing = async (req, res, next) => {
+  const userId = req.user._id;
   const {
     title,
     description,
@@ -27,7 +27,6 @@ const addListing = async (req, res) => {
     disability,
   } = req.body;
 
-  // Check if name and bio properties are present in the request body
   if (
     !title ||
     !description ||
@@ -72,61 +71,131 @@ const addListing = async (req, res) => {
       water,
       parking,
       disability,
-      // createdBy: userID,
+      createdBy: userId,
     });
     res.status(201).json(listing);
+    next();
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ message: err.message });
   }
 };
 
-const getAllListings = async (req, res) => {
+const getAllListings = async (req, res, next) => {
   try {
     const listings = await Listing.find({}).sort({ createdAt: -1 });
     res.status(200).json(listings);
+    next();
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: err.message });
+  }
+};
+
+const getAllUserListings = async (req, res, next) => {
+  try {
+    const createdBy = req.user._id;
+    const listings = await Listing.find({ createdBy }).sort({ createdAt: -1 });
+    res.status(200).json(listings);
+    next();
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 
 const getDetailsById = async (req, res) => {
-  const { id } = req.params;
-  const listing = await Listing.findById(id);
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "No such listings found" });
-  }
-
   try {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ message: "No such listing found" });
+    }
+    const listing = await Listing.findById(id);
+    if (!listing) {
+      return res.status(404).json({ message: "No such listing found" });
+    }
     res.status(200).json(listing);
+    next();
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: err.message });
   }
 };
 
-/*const getFiltered = async (req, res) => {
-  const { id } = req.params;
-  const listing = await Listing.findById(id);
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "No such listings found" });
-  }
+const getFiltered = async (req, res) => {
+  const {
+    postalCode,
+    city,
+    surface,
+    roomCount,
+    rent,
+    transport,
+    elevator,
+    internet,
+    electricity,
+    water,
+    parking,
+    disability,
+  } = req.body;
 
   try {
-    res.status(200).json(listing);
+    const filter = {};
+    if (postalCode) {
+      filter.postalCode = postalCode;
+    }
+    if (city) {
+      filter.city = city;
+    }
+    if (surface && !isNaN(surface)) {
+      filter.surface = { $gt: parseFloat(surface) };
+    }
+
+    if (roomCount && !isNaN(roomCount)) {
+      filter.roomCount = { $lt: parseInt(roomCount) };
+    }
+    if (rent && !isNaN(rent)) {
+      filter.rent = { $lt: parseFloat(rent) };
+    }
+    if (transport && !isNaN(transport)) {
+      filter.transport = { $lt: parseInt(transport) };
+    }
+    if (elevator) {
+      filter.elevator = elevator;
+    }
+    if (internet) {
+      filter.internet = internet;
+    }
+    if (electricity) {
+      filter.electricity = electricity;
+    }
+    if (water) {
+      filter.water = water;
+    }
+    if (parking) {
+      filter.parking = parking;
+    }
+    if (disability) {
+      filter.disability = disability;
+    }
+
+    const query = Listing.find(filter).sort({ createdAt: -1 });
+
+    const filteredListings = await query.exec();
+
+    res.status(200).json(filteredListings);
+    next();
   } catch (err) {
-    res.status(500).json({ error: "listing data could not be retrieved" });
+    res.status(500).json({ message: err.message });
   }
-};*/
+};
 
 const deleteListing = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ error: "No such user" });
+    return res.status(400).json({ error: "No such listing found" });
   }
   try {
     const listing = await Listing.findByIdAndDelete(id);
-    res.status(200).json(listing);
+    res.status(200).json({ message: id + " has been deleted" });
+    next();
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ message: err.message });
   }
 };
 
@@ -136,21 +205,27 @@ const changeListingDetails = async (req, res) => {
     return res.status(400).json({ error: "No such listing found" });
   }
   try {
+    const oldListing = await Goal.findById(id);
+    if (!oldListing) {
+      return res.status(404).json({ error: "Listing not found" });
+    }
     const listing = await Listing.findOneAndUpdate({ _id: id }, req.body, {
       new: true,
       overwrite: true,
     });
     res.status(200).json(listing);
+    next();
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ message: err.message });
   }
 };
 
 module.exports = {
   addListing,
   getAllListings,
+  getAllUserListings,
   getDetailsById,
-  //getFiltered,
+  getFiltered,
   deleteListing,
   changeListingDetails,
 };

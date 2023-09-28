@@ -1,41 +1,26 @@
-const User = require("../models/userModel");
-const auth = require("../middleware/authentication");
+const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const User = require("../models/userModel");
 
-const signinForm = async (req, res) => {
+const createToken = (_id) => {
+  return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "3d" });
+};
+
+const signinForm = async (req, res, next) => {
   const { email, password } = req.body;
 
-  // Check if username and password properties are present in the request body
-  if (!email || !password) {
-    return res
-      .status(400)
-      .json({ message: "Username and password are required" });
-  }
-
   try {
-    // Find the user by username
-    const user = await User.findOne({ email });
+    const user = await User.signin(email, password);
 
-    if (!user) {
-      return res.status(401).json({ message: "User not found" });
-    }
+    // create a token
+    const token = createToken(user._id);
 
-    const comparePasswords = await bcrypt.compare(password, user.password);
-    if (!comparePasswords) {
-      return res.status(401).json({ message: "Incorrect password" });
-    }
-
-    const userObject = {
-      _id: user._id,
-    };
-    // If the password is correct, you can generate an authentication token (JWT) here
-    const token = auth.generateAuthToken(userObject); // Implement this function to generate a token
-
-    // Respond with the token and any other user-related data you want to send
-    res.status(200).json({ token, user: user.toJSON() });
+    res
+      .status(200)
+      .json({ message: user.last_name + " logged in successfully", token });
+    next();
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(400).json({ message: err.message });
   }
 };
 
