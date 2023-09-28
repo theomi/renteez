@@ -7,7 +7,7 @@ import Browse from './pages/Browse'
 import Offer from './pages/Offer'
 import Navbar from './components/Navbar'
 import Login from './pages/Login'
-import Register from './pages/Register'
+import Signup from './pages/Signup'
 import Profile from './pages/Profile'
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
             />
             <Route
               path="/register"
-              element={<Register />}
+              element={<Signup />}
             />
             <Route
               path="/profile"

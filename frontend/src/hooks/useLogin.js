@@ -3,19 +3,19 @@ import { useAuthContext } from './useAuthContext'
 import { REACT_APP_API_URL } from '../utils/apiConfig';
 
 
-export const useSignup = () => {
+export const useLogin = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
     const { dispatch } = useAuthContext()
 
-    const signup = async (title, first_name, last_name, email, password, phone) => {
+    const login = async (email, password) => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch('http://localhost:3001/api/signup', {
+        const response = await fetch('http://localhost:3001/api/signin', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title, first_name, last_name, email, password, phone })
+            body: JSON.stringify({ email, password })
         })
 
         const json = await response.json()
@@ -34,5 +34,5 @@ export const useSignup = () => {
             setIsLoading(false)
         }
     }
-    return { signup, isLoading, error }
+    return { login, isLoading, error }
 }
