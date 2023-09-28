@@ -3,7 +3,9 @@ const mongoose = require("mongoose");
 const User = require("../models/userModel");
 
 const createToken = (_id) => {
-  return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "3d" });
+  return jwt.sign({ _id }, process.env.ACCESS_TOKEN_SECRET, {
+    expiresIn: "3d",
+  });
 };
 
 const signinForm = async (req, res, next) => {
@@ -18,7 +20,6 @@ const signinForm = async (req, res, next) => {
     res
       .status(200)
       .json({ message: user.last_name + " logged in successfully", token });
-    next();
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

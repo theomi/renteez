@@ -4,7 +4,7 @@ const {
   getAllListings,
   getAllUserListings,
   getDetailsById,
-  //getFiltered,
+  getFiltered,
   deleteListing,
   changeListingDetails,
 } = require("../controllers/listingController");
