@@ -3,7 +3,9 @@ const mongoose = require("mongoose");
 const User = require("../models/userModel");
 
 const createToken = (_id) => {
-  return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "3d" });
+  return jwt.sign({ _id }, process.env.ACCESS_TOKEN_SECRET, {
+    expiresIn: "3d",
+  });
 };
 
 // Controller methods
@@ -21,7 +23,6 @@ const createUser = async (req, res, next) => {
     );
     const token = createToken(user._id);
     res.status(201).json({ message: "User registered successfully", token });
-    next();
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
