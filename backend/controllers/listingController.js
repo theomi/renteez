@@ -140,7 +140,7 @@ const getFiltered = async (req, res) => {
       filter.city = city;
     }
     if (surface && !isNaN(surface)) {
-      filter.surface = { $gt: parseFloat(surface) };
+      filter.surface = { $lt: parseFloat(surface) };
     }
     if (roomCount && !isNaN(roomCount)) {
       filter.roomCount = { $lt: parseInt(roomCount) };

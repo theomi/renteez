@@ -17,9 +17,7 @@ const signinForm = async (req, res, next) => {
     // create a token
     const token = createToken(user._id);
 
-    res
-      .status(200)
-      .json({ message: user.last_name + " logged in successfully", token });
+    res.status(200).json({ message: user.email, token });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
