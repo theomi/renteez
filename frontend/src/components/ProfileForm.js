@@ -5,15 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { REACT_APP_API_URL } from '../utils/apiConfig';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 
-const apiUrl = `${REACT_APP_API_URL}/api/`;
-
-
-
-const icon_warning = <FontAwesomeIcon icon={faExclamationTriangle} />
-
-
-
-
 const SearchForm = () => {
     const [title, setTitle] = useState('');
     const [first_name, setFirstName] = useState('');
@@ -25,33 +16,32 @@ const SearchForm = () => {
     const [hasError, setHasError] = useState(false);
     const navigate = useNavigate();
 
-
     return (
         <div>
             <form className="search-form">
 
-            
+
                 <div>
                     <label htmlFor='title'>Title</label>
                     <select className='input' id='rentPrice' name='rentPrice' value={title}
                         onChange={(e) => setTitle(e.target.value)} required>
-                        <option value='' disabled selected>Select...</option>
+                        <option value='' disabled>Select...</option>
                         <option value='mr'>Mr</option>
                         <option value='ms'>Ms</option>
                     </select>
                 </div>
-                    <div>
-                        <label htmlFor='userName'>First name</label>
-                        <input id='userName' type="text" className='input' placeholder='John' required value={first_name}
+                <div>
+                    <label htmlFor='userName'>First name</label>
+                    <input id='userName' type="text" className='input' placeholder='John' required value={first_name}
                         onChange={(e) => setFirstName(e.target.value)}></input>
-                    
-                    </div>
-                    <div>
-                        <label htmlFor='lastName'>Last name</label>
-                        <input id='lastName' type="text" className='input' placeholder='Wick' required value={last_name}
+
+                </div>
+                <div>
+                    <label htmlFor='lastName'>Last name</label>
+                    <input id='lastName' type="text" className='input' placeholder='Wick' required value={last_name}
                         onChange={(e) => setLastName(e.target.value)}></input>
-                    </div>
-               
+                </div>
+
 
                 <div>
                     <label htmlFor='emailAddress'>Email Address</label>

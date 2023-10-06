@@ -5,15 +5,17 @@ import { useAuthContext } from "../hooks/useAuthContext";
 
 import { REACT_APP_API_URL } from '../utils/apiConfig';
 
-const apiUrl = `${REACT_APP_API_URL}/api/listings`;
+const fetchOffersUrl = `${REACT_APP_API_URL}/api/listings/userlistings`;
+const fetchUserInfoUrl = `${REACT_APP_API_URL}/api/user/me`;
 
 const Profile = () => {
   const [offers, setOffers] = useState(null)
+  const [userInfo, setUserInfo] = useState(null)
   const { user } = useAuthContext()
 
   useEffect(() => {
     const fetchOffers = async () => {
-      const response = await fetch(apiUrl, {
+      const response = await fetch(fetchOffersUrl, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }
@@ -24,13 +26,29 @@ const Profile = () => {
         setOffers(json)
       }
     }
+
+    const fetchUserInfo = async () => {
+      const response = await fetch(fetchUserInfoUrl, {
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      })
+      const json = await response.json()
+
+      if (response.ok) {
+        setUserInfo(json)
+      }
+    }
+
     if (user) {
       fetchOffers()
+      fetchUserInfo()
     }
   }, [user])
   return (
     <div>
-      <h2 className="title-second">Hello, user</h2>
+      <h2 className="title-second">Hello, {userInfo && userInfo.first_name}</h2>
+
       <ProfileForm />
       <hr />
       <h2 className="title-second">Your offers</h2>
