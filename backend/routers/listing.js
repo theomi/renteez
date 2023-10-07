@@ -18,8 +18,8 @@ router.post("/", generateAuthToken, addListing);
 router.get("/", getAllListings);
 // GET all user owned listing
 router.get("/userlistings", generateAuthToken, getAllUserListings);
-// GET filtered
-router.get("/filtered", getFiltered);
+// POST filtered
+router.post("/filtered", getFiltered);
 // GET listing by id
 router.get("/:id", getDetailsById);
 // DELETE a listing

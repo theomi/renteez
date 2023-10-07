@@ -139,34 +139,90 @@ const getFiltered = async (req, res) => {
     if (city) {
       filter.city = city;
     }
-    if (surface && !isNaN(surface)) {
-      filter.surface = { $lt: parseFloat(surface) };
+    switch (surface) {
+      case '-20':
+        filter.surface = { "$lt": 20 }
+        break;
+      case '20-40':
+        filter.surface = { "$gte": 20, "$lt": 40 }
+        break;
+      case '40-50':
+        filter.surface = { "$gte": 40, "$lt": 50 }
+        break;
+      case '50-100':
+        filter.surface = { "$gte": 50, "$lt": 100 }
+        break;
+      case '100+':
+        filter.surface = { "$gte": 100 }
+        break;
     }
-    if (roomCount && !isNaN(roomCount)) {
-      filter.roomCount = { $lt: parseInt(roomCount) };
+    switch (roomCount) {
+      case '1-2':
+        filter.roomCount = { "$gte": 1, "$lte": 2 }
+        break;
+      case '2-3':
+        filter.roomCount = { "$gte": 2, "$lte": 3 }
+        break;
+      case '3-4':
+        filter.roomCount = { "$gte": 3, "$lte": 4 }
+        break;
+      case '4+':
+        filter.roomCount = { "$gt": 4 }
+        break;
     }
-    if (rent && !isNaN(rent)) {
-      filter.rent = { $lt: parseFloat(rent) };
+
+    switch (rent) {
+      case '-400':
+        filter.rent = { "$lt": 400 }
+        break;
+      case '400-500':
+        filter.rent = { "$gte": 400, "$lt": 500 }
+        break;
+      case '500-600':
+        filter.rent = { "$gte": 500, "$lt": 600 }
+        break;
+      case '600-700':
+        filter.rent = { "$gte": 600, "$lt": 700 }
+        break;
+      case '700+':
+        filter.rent = { "$gte": 700 }
+        break;
     }
-    if (transport && !isNaN(transport)) {
-      filter.transport = { $lt: parseInt(transport) };
+
+    switch (transport) {
+      case '-100':
+        filter.transport = { "$lt": 100 }
+        break;
+      case '100-150':
+        filter.transport = { "$gte": 100, "$lt": 150 }
+        break;
+      case '150-300':
+        filter.transport = { "$gte": 150, "$lt": 300 }
+        break;
+      case '300-500':
+        filter.transport = { "$gte": 300, "$lt": 500 }
+        break;
+      case '500+':
+        filter.transport = { "$gte": 500 }
+        break;
     }
-    if (elevator !== undefined) {
+
+    if (elevator) {
       filter.elevator = elevator;
     }
-    if (internet !== undefined) {
+    if (internet) {
       filter.internet = internet;
     }
-    if (electricity !== undefined) {
+    if (electricity) {
       filter.electricity = electricity;
     }
-    if (water !== undefined) {
+    if (water) {
       filter.water = water;
     }
-    if (parking !== undefined) {
+    if (parking) {
       filter.parking = parking;
     }
-    if (disability !== undefined) {
+    if (disability) {
       filter.disability = disability;
     }
     console.log(filter);
