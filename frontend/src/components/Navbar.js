@@ -1,7 +1,11 @@
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 import logo from "../img/logo.svg"
 import { useLogout } from "../hooks/useLogout"
 import { useAuthContext } from "../hooks/useAuthContext";
+
+import { REACT_APP_API_URL } from '../utils/apiConfig';
+const apiUrl = `${REACT_APP_API_URL}/api/user/me`;
 
 const Navbar = () => {
 
@@ -11,35 +15,34 @@ const Navbar = () => {
   const handleClick = () => {
     logout()
   }
+
   return (
     <nav className="navbar">
       <Link to="/"><img className="logo" src={logo} alt="Renteez" /></Link>
       <div className="links">
         <Link to="/">Home</Link>
         <Link to="/browse">Browse</Link>
-        <Link to="/about">About</Link>
       </div>
       <div>
       </div>
       <div className="nav-right">
         {user && (
           <div>
-            <span>{user.email}</span>
-            <button onClick={handleClick} style={{
-              color: 'white',
+            <Link to="/profile">Profile</Link>
+            <Link to="#" onClick={handleClick} style={{
               borderColor: '#3FCA54',
               color: '#3FCA54',
+              backgroundColor: 'white',
               borderStyle: 'solid',
               padding: '6px',
               borderRadius: '8px'
-            }}>Logout</button>
+            }}>Logout</Link>
           </div>
         )}
         {!user && (
           <div>
             <Link to="/login">Login</Link>
             <Link to="/register" style={{
-              color: 'white',
               borderColor: '#e13737',
               color: '#e13737',
               borderStyle: 'solid',

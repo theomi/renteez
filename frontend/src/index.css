@@ -189,8 +189,10 @@
   padding-right: 20px;
 }
 
-.home-picture {
-  display: inline-block;
+
+.picture-right {
+  width: 500px;
+  float: right;
 }
 
 .offers {
@@ -229,7 +231,7 @@ hr {
   /* Adjust the gap between columns as needed */
 }
 
-.search-form label {
+form label {
   font-weight: bold;
   color: #949494;
 }
@@ -335,7 +337,59 @@ hr {
   font-weight: bold;
 }
 
+.banner-success {
+  border: 1px solid green;
+  background-color: lightgreen;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
 .input-error {
   border: 0.5px solid #E13737;
   color: #E13737;
+}
+
+/* Style pour la liste des cases à cocher */
+.services-list {
+  list-style: none;
+  /* Supprime les puces de la liste */
+  padding: 0;
+  /* Supprime la marge intérieure */
+  display: flex;
+  /* Utilise la disposition flexible pour aligner les éléments sur la même ligne */
+
+}
+
+.services-list label {
+  color: #949494;
+  font-weight: normal;
+}
+
+/* Style pour chaque élément de la liste (case à cocher + label) */
+.services-list li {
+  margin-right: 20px;
+  /* Espacement entre chaque élément */
+  display: flex;
+  /* Utilise la disposition flexible pour aligner les éléments sur la même ligne */
+  align-items: center;
+  /* Centre verticalement les éléments */
+}
+
+/* Style pour les cases à cocher */
+.services-list li input[type="checkbox"] {
+  margin-right: 5px;
+  /* Espacement entre la case à cocher et le label */
+}
+
+.delete-account {
+  border: 0;
+  background-color: transparent;
+  color: #949494;
+  float: right;
+}
+
+.delete-account:hover {
+  cursor: pointer;
+  color: red;
 }

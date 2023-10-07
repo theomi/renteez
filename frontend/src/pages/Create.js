@@ -1,81 +1,62 @@
-// const Create = () => {
-//   return (
-//     <div className="create">
-//       <h2>Add a New Blog</h2>
-//     </div>
-//   );
-// }
- 
-// export default Create;
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react";
-import { useNavigate  } from "react-router-dom";
-import { REACT_APP_API_URL } from '../utils/apiConfig';
+import { useSignup } from "../hooks/useSignup"
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 
-const apiUrl = `${REACT_APP_API_URL}/api/blogs`;
+const icon_lock = <FontAwesomeIcon icon={faLock} />
+const icon_warning = <FontAwesomeIcon icon={faExclamationTriangle} />
 
-const Create = () => {
+const CreatePage = () => {
+
   const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
-  const [author, setAuthor] = useState('mario');
-  const navigate = useNavigate();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
+  const { signup, error, isLoading } = useSignup()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const blog = { title, body, author };
-
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      body: JSON.stringify(blog),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    const json = await response.json()
-
-    if (!response.ok) {
-      console.log("Error");
-    }
-    if (response.ok) {
-      setTitle("");
-      setBody("");
-      setAuthor("");
-      navigate('/');
-      console.log('new blog added:', json)
-    }
+    await signup(title, firstName, lastName, email, password, phone)
 
   }
 
   return (
-    <div className="create">
-      <h2>Add a New Blog</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Blog title:</label>
-        <input 
-          type="text" 
-          required 
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <label>Blog body:</label>
-        <textarea
-          required
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-        ></textarea>
-        <label>Blog author:</label>
-        <select
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-        >
-          <option value="mario">mario</option>
-          <option value="yoshi">yoshi</option>
-        </select>
-        <button>Add Blog</button>
-      </form>
+    <div>
+      <h2 className="form-title">Create a new offer</h2>
+
+      <div className='form-container'>
+
+        {error && <div className="banner mt-16">{icon_warning} {error}</div>}
+
+        <form method="post" className="register-form" onSubmit={handleSubmit}>
+
+          <div>
+            <label htmlFor='title'>Title</label>
+            <input id='title' type="text" className='input' placeholder='Describe your property in one line' required value={title}
+              onChange={(e) => setTitle(e.target.value)}></input>
+          </div>
+
+          <div>
+            <label htmlFor='password'>Password</label>
+            <input id='password' type="password" className='input' placeholder='••••••••' required value={password}
+              onChange={(e) => setPassword(e.target.value)}></input>
+          </div>
+
+          <div>
+            <label htmlFor='phone'>Phone</label>
+            <input id='phone' type="tel" className='input' placeholder='+358' required value={phone}
+              onChange={(e) => setPhone(e.target.value)}></input>
+          </div>
+          <button disabled={isLoading} className="button">{icon_lock} Register</button>
+        </form>
+      </div>
+
     </div>
   );
 }
- 
-export default Create;
+
+export default CreatePage;

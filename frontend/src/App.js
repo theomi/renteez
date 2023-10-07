@@ -10,6 +10,7 @@ import Navbar from './components/Navbar'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Profile from './pages/Profile'
+import NotFound from './pages/NotFound'
 
 function App() {
   const { user } = useAuthContext()
@@ -21,16 +22,12 @@ function App() {
         <div className="content">
           <Routes>
             <Route
-              path="/"
+              index
               element={<Home />}
             />
             <Route
               path="/browse"
               element={<Browse />}
-            />
-            <Route
-              path="/create"
-              element={<Create />}
             />
             <Route
               path="/offer/:id"
@@ -48,6 +45,12 @@ function App() {
               path="/profile"
               element={user ? <Profile /> : <Navigate to="/login" />}
             />
+            <Route
+              path="/create"
+              element={user ? <Create /> : <Navigate to="/login" />}
+            />
+            <Route path="*" element={<NotFound />} />
+
           </Routes>
         </div>
       </BrowserRouter>

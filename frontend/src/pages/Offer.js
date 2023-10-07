@@ -43,11 +43,11 @@ const Offer = () => {
       <img src={apartment} className="offer-detail-picture" alt="offer" />
       <h1 className="offer-title">{offer.title}</h1>
       <h2 className="offer-address">{icon_address} {offer.address}, {offer.city}</h2>
-      <h3 className="offer-infos">{icon_surface} 46,2 m²    {icon_rooms} 2½ rooms  {icon_transports} ~350m  {icon_pets} allowed  {icon_power} not included    {icon_water} not included</h3>
+      <h3 className="offer-infos">{icon_surface} {offer.surface} m²    {icon_rooms} {offer.roomCount} rooms  {icon_transports} ~{offer.transport}m  {icon_pets} {offer.pets ? "allowed" : "prohibited"}  {icon_power} {offer.electricity ? "included" : "not included"}    {icon_water} {offer.water ? "included" : "not included"}</h3>
       <p className="offer-text">{offer.description}</p>
       <h1 className="offer-price mt-32 mb-32">{offer.rent}€/mo  <span className="charges">(excl. 0€ charges)</span></h1>
       <div className="contact-info">
-        <h3>Offer published by {icon_user} Replivinge on {icon_calendar} {offer.createdAt}</h3>
+        <h3>Offer published by {icon_user} {offer.createdBy} on {icon_calendar} {offer.createdAt}</h3>
         <a className="button mt-16 mr-16" href="#">{icon_envelope} Contact by email</a>
         <a className="button-disabled mt-16 hidden">{icon_phone} Contact by phone</a>
       </div>
