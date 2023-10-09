@@ -55,8 +55,7 @@ const changeDetails = async (req, res, next) => {
       return res.status(404).json({ error: "User not found" });
     }
     const updatedUser = await User.findOneAndUpdate(user._id, req.body, {
-      new: true,
-      overwrite: true,
+      new: true
     });
     res.status(200).json({
       message: "Details for " + updatedUser.last_name + " has been updated",

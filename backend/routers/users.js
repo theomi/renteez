@@ -15,6 +15,6 @@ router.get("/me", getUserById);
 // DELETE a user by id
 router.delete("/me", deleteUserById);
 // PUT change user details
-router.put("/me", changeDetails);
+router.patch("/me", changeDetails);
 
 module.exports = router;
