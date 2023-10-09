@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { REACT_APP_API_URL } from '../utils/apiConfig';
 import Card from '../components/Card';
-
+import loading from '../img/loading.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
@@ -27,6 +27,7 @@ const Browse = () => {
 
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [search, setSearch] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -61,6 +62,7 @@ const Browse = () => {
     if (response.ok) {
       console.log(json)
       setOffers(json)
+      setSearch(true)
       setIsLoading(false)
     }
 
@@ -183,16 +185,19 @@ const Browse = () => {
         <button className="button" disabled={isLoading}>{icon_search} Search</button>
       </form >
       <hr />
-      <h2 className="title-second">Latest offers</h2>
-      <div className="offers">
+      <h2 className="title-second">{search ? "Search results" : "All offers"}</h2>
 
-        {offers && offers.map(offer => (
-
-          <Card offer={offer} />
-
-        ))}
-
-      </div>
+      {offers ? (
+        offers.length > 0 ? (
+          <div className="offers">
+            {offers.map((offer) => <Card offer={offer} />)}
+          </div>
+        ) : (
+          <p className="offer-message">No offer found matching your criteria</p>
+        )
+      ) : (
+        <img src={loading} className="loading" alt="loading" />
+      )}
 
     </div>
   );

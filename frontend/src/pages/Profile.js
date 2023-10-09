@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Card from '../components/Card';
 import { useAuthContext } from "../hooks/useAuthContext";
 import useField from "../hooks/useField"
+import loading from '../img/loading.svg'
 import { useProfile } from '../hooks/useProfile'
 import { REACT_APP_API_URL } from '../utils/apiConfig';
 
@@ -18,6 +19,7 @@ const Profile = () => {
 
   const [offers, setOffers] = useState(null)
   const [title, setTitle] = useState(null)
+  const [formReady, setFormReady] = useState(false)
   const { user } = useAuthContext()
   const { editProfile, error, isLoading, success, deleteUser } = useProfile();
 
@@ -49,6 +51,7 @@ const Profile = () => {
         emailInput.setValue(json.email)
         phoneInput.setValue(json.phone)
         setTitle(json.title)
+        setFormReady(true)
       }
     }
 
@@ -79,54 +82,65 @@ const Profile = () => {
       {error && <div className="banner mt-16">{error}</div>}
       {success && <div className="banner-success mt-16">{success}</div>}
 
-      <form className="search-form" onSubmit={handleSubmit}>
+      {formReady ? (
+
+        <div>
+
+          <form className="search-form" onSubmit={handleSubmit}>
 
 
-        <div>
-          <label htmlFor='title'>Title</label>
-          <select className='input' id='rentPrice' name='rentPrice' value={title}
-            onChange={(e) => setTitle(e.target.value)} required>
-            <option value='' disabled>Select...</option>
-            <option value='mr'>Mr</option>
-            <option value='ms'>Ms</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor='userName'>First name</label>
-          <input {...firstNameInput}></input>
-        </div>
-        <div>
-          <label htmlFor='lastName'>Last name</label>
-          <input {...lastNameInput}></input>
-        </div>
-        <div>
-          <label htmlFor='emailAddress'>Email Address</label>
-          <input {...emailInput}></input>
-        </div>
-        <div>
-          <label htmlFor='password'>Password</label>
-          <input {...passwordInput}></input>
-        </div>
-        <div>
-          <label htmlFor='phone'>Phone</label>
-          <input {...phoneInput}></input>
-        </div>
-        <button disabled={isLoading} className="button"> Update</button>
-      </form>
+            <div>
+              <label htmlFor='title'>Title</label>
+              <select className='input' id='rentPrice' name='rentPrice' value={title}
+                onChange={(e) => setTitle(e.target.value)} required>
+                <option value='' disabled>Select...</option>
+                <option value='mr'>Mr</option>
+                <option value='ms'>Ms</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor='userName'>First name</label>
+              <input {...firstNameInput}></input>
+            </div>
+            <div>
+              <label htmlFor='lastName'>Last name</label>
+              <input {...lastNameInput}></input>
+            </div>
+            <div>
+              <label htmlFor='emailAddress'>Email Address</label>
+              <input {...emailInput}></input>
+            </div>
+            <div>
+              <label htmlFor='password'>Password</label>
+              <input {...passwordInput}></input>
+            </div>
+            <div>
+              <label htmlFor='phone'>Phone</label>
+              <input {...phoneInput}></input>
+            </div>
+            <button disabled={isLoading} className="button"> Update</button>
+          </form>
 
-      <button className="delete-account" onClick={handleClick}>Delete account</button>
+          <button className="delete-account" onClick={handleClick}>Delete account</button>
+
+        </div>
+      ) :
+        <img src={loading} className="loading" alt="loading" />
+      }
 
       <hr className="mt-32" />
       <h2 className="title-second">Your offers</h2>
-      <div className="offers">
-
-        {offers && offers.map(offer => (
-
-          <Card offer={offer} />
-
-        ))}
-
-      </div>
+      {offers ? (
+        offers.length > 0 ? (
+          <div className="offers">
+            {offers.map((offer) => <Card offer={offer} editable="true" />)}
+          </div>
+        ) : (
+          <p className="offer-message">Yo have no offers</p>
+        )
+      ) : (
+        <img src={loading} className="loading" alt="loading" />
+      )}
 
       <Link className="button mt-32" to="/create">New offer</Link>
     </div>

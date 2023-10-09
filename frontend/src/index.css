@@ -130,44 +130,6 @@
   color: #fff;
 }
 
-/* create new blog form */
-.create {
-  max-width: 400px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.create label {
-  text-align: left;
-  display: block;
-}
-
-.create h2 {
-  font-size: 20px;
-  color: #f1356d;
-  margin-bottom: 30px;
-}
-
-.create input,
-.create textarea,
-.create select {
-  width: 100%;
-  padding: 6px 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  display: block;
-}
-
-.create button {
-  background: #f1356d;
-  color: #fff;
-  border: 0;
-  padding: 8px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
 .logo {
   max-width: 128px;
 }
@@ -200,7 +162,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   /* Three equal-width columns */
-  gap: 50px;
+  gap: 25px;
   /* Adjust the gap between columns as needed */
 }
 
@@ -220,9 +182,19 @@ hr {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   color: #949494;
+  resize: vertical;
 }
 
-.search-form {
+input[type=text],
+select {
+  height: 40px;
+}
+
+.input::placeholder {
+  color: #c6c6c6;
+}
+
+.input[ty] .search-form {
   margin-top: 20px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -351,14 +323,14 @@ form label {
 }
 
 /* Style pour la liste des cases à cocher */
-.services-list {
+.services-list,
+.offer-services {
   list-style: none;
   /* Supprime les puces de la liste */
   padding: 0;
   /* Supprime la marge intérieure */
   display: flex;
   /* Utilise la disposition flexible pour aligner les éléments sur la même ligne */
-
 }
 
 .services-list label {
@@ -392,4 +364,86 @@ form label {
 .delete-account:hover {
   cursor: pointer;
   color: red;
+}
+
+.offer-services path {
+  color: #c6c6c6;
+  font-weight: normal;
+}
+
+/* Style pour chaque élément de la liste (case à cocher + label) */
+.offer-services li {
+  margin-right: 15px;
+  /* Espacement entre chaque élément */
+  display: flex;
+  /* Utilise la disposition flexible pour aligner les éléments sur la même ligne */
+  align-items: center;
+  /* Centre verticalement les éléments */
+  color: #c6c6c6;
+
+}
+
+.offer-services li svg {
+  margin-right: 5px;
+}
+
+.edit-actions {
+  float: right;
+}
+
+.loading {
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  display: flex;
+}
+
+.offer-message {
+  text-align: center;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  font-size: x-large;
+  font-weight: bold;
+  color: #c6c6c6;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.flex-10 {
+  flex: 10%;
+}
+
+.flex-20 {
+  flex: 20%;
+}
+
+.flex-30 {
+  flex: 30%;
+}
+
+.flex-40 {
+  flex: 40%;
+}
+
+.flex-50 {
+  flex: 50%;
+}
+
+.flex-60 {
+  flex: 60%;
+}
+
+.flex-70 {
+  flex: 70%;
+}
+
+.flex-80 {
+  flex: 80%;
+}
+
+.flex-90 {
+  flex: 90%;
 }

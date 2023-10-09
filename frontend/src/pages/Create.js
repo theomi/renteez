@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react";
 import { useSignup } from "../hooks/useSignup"
+import useField from '../hooks/useField';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 
 const icon_lock = <FontAwesomeIcon icon={faLock} />
@@ -9,18 +10,22 @@ const icon_warning = <FontAwesomeIcon icon={faExclamationTriangle} />
 
 const CreatePage = () => {
 
-  const [title, setTitle] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [phone, setPhone] = useState('');
+  const titleInput = useField("text", "Name your offer")
+  const descriptionInput = useField("text", "Describe your property in some lines")
+  const addressInput = useField("text", "Kirjanpitäjänkuja 4")
+  const postalCodeInput = useField("text", "02770")
+  const surfaceInput = useField("number", "105")
+  const roomCountInput = useField("text", "4.5")
+  const rentInput = useField("number", "479")
+  const chargesInput = useField("number", "30")
+  const [city, setCity] = useState('')
+
+
   const { signup, error, isLoading } = useSignup()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    await signup(title, firstName, lastName, email, password, phone)
 
   }
 
@@ -36,22 +41,49 @@ const CreatePage = () => {
 
           <div>
             <label htmlFor='title'>Title</label>
-            <input id='title' type="text" className='input' placeholder='Describe your property in one line' required value={title}
-              onChange={(e) => setTitle(e.target.value)}></input>
+            <input {...titleInput} />
           </div>
 
           <div>
-            <label htmlFor='password'>Password</label>
-            <input id='password' type="password" className='input' placeholder='••••••••' required value={password}
-              onChange={(e) => setPassword(e.target.value)}></input>
+            <label htmlFor='description'>Description</label>
+            <textarea rows="5" {...descriptionInput}></textarea>
           </div>
 
-          <div>
-            <label htmlFor='phone'>Phone</label>
-            <input id='phone' type="tel" className='input' placeholder='+358' required value={phone}
-              onChange={(e) => setPhone(e.target.value)}></input>
+          <div className='flex'>
+            <div className='flex-60 mr-16'>
+              <label htmlFor='address'>Address</label>
+              <input {...addressInput} />
+            </div>
+            <div className='flex-10 mr-16'>
+              <label htmlFor='postalCode'>Postcode</label>
+              <input {...postalCodeInput} pattern="\d*" maxlength="5" />
+            </div>
+            <div className='flex-30'>
+              <label htmlFor='city'>City</label>
+              <select className='input' id='city' name='city' value={city} onChange={(e) => setCity(e.target.value)}>
+                <option value='' disabled>Choose...</option>
+                <option value='Helsinki'>Helsinki</option>
+                <option value='Espoo'>Espoo</option>
+                <option value='Vantaa'>Vantaa</option>
+              </select>
+            </div>
           </div>
-          <button disabled={isLoading} className="button">{icon_lock} Register</button>
+
+          <hr />
+
+          <div className='flex'>
+            <div className='flex-50 mr-16'>
+              <label htmlFor='address'>Surface</label>
+              <input {...surfaceInput} />
+            </div>
+            <div className='flex-50'>
+              <label htmlFor='postalCode'>Room count</label>
+              <input {...roomCountInput} />
+            </div>
+          </div>
+
+
+          <button disabled={isLoading} className="button">Create offer</button>
         </form>
       </div>
 
