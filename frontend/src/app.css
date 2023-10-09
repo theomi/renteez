@@ -25,16 +25,19 @@ body {
     align-items: start;
   }
 }
+
 .book {
   background: #fff;
   border-radius: 1rem;
   padding: 2rem;
   text-align: center;
 }
+
 .book img {
   width: 100%;
   object-fit: cover;
 }
+
 .book h2 {
   margin-top: 1rem;
   font-size: 1rem;
@@ -46,9 +49,11 @@ body {
   margin-top: 0.5rem;
   letter-spacing: 2px;
 }
+
 .book p {
   margin: 1rem 0 0.5rem;
 }
+
 h1 {
   text-align: center;
   margin-top: 4rem;

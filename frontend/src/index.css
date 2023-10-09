@@ -109,7 +109,7 @@
   font-weight: bold;
 }
 
-.button-disabled {
+.button:disabled {
   background: #eaeaea;
   color: #fff;
   border: 0;
@@ -267,6 +267,10 @@ form label {
 
 .mt-32 {
   margin-top: 32px;
+}
+
+.mb-8 {
+  margin-bottom: 8px;
 }
 
 .mb-16 {
@@ -446,4 +450,20 @@ form label {
 
 .flex-90 {
   flex: 90%;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.property-details {
+  list-style: none;
+  padding: 0;
+  line-height: 2;
+}
+
+.property-details label {
+  margin-left: 8px;
+  color: #000;
+  font-weight: normal;
 }
