@@ -133,7 +133,7 @@ const Profile = () => {
       {offers ? (
         offers.length > 0 ? (
           <div className="offers">
-            {offers.map((offer) => <Card offer={offer} editable="true" />)}
+            {offers.map((offer) => <Card key={offer._id} offer={offer} editable="true" />)}
           </div>
         ) : (
           <p className="offer-message">Yo have no offers</p>

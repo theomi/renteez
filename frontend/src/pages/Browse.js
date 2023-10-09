@@ -94,7 +94,7 @@ const Browse = () => {
           <div>
             <label htmlFor='city'>City</label>
             <select className='input' id='city' name='city' value={city} onChange={(e) => setCity(e.target.value)}>
-              <option value='' selected>Any</option>
+              <option value=''>Any</option>
               <option value='Helsinki'>Helsinki</option>
               <option value='Espoo'>Espoo</option>
               <option value='Vantaa'>Vantaa</option>
@@ -104,7 +104,7 @@ const Browse = () => {
           <div>
             <label htmlFor='surface'>Surface</label>
             <select className='input' id='surface' name='surface' value={surface} onChange={(e) => setSurface(e.target.value)}>
-              <option value='' selected>Any</option>
+              <option value=''>Any</option>
               <option value='-20'>less than 20 m²</option>
               <option value='20-40'>20 m² - 40 m²</option>
               <option value='40-50'>40 m² - 50 m²</option>
@@ -117,7 +117,7 @@ const Browse = () => {
           <div>
             <label htmlFor='roomCount'>Room count</label>
             <select className='input' id='roomCount' name='roomCount' value={roomCount} onChange={(e) => setRoomCount(e.target.value)}>
-              <option value='' selected>Any</option>
+              <option value=''>Any</option>
               <option value='1-2'>1-2</option>
               <option value='2-3'>2-3</option>
               <option value='3-4'>3-4</option>
@@ -128,7 +128,7 @@ const Browse = () => {
           <div>
             <label htmlFor='transport'>Distance from transports</label>
             <select className='input' id='transport' name='transport' value={transport} onChange={(e) => setTransport(e.target.value)}>
-              <option value='' selected>Any</option>
+              <option value=''>Any</option>
               <option value='-100'>less than 100m</option>
               <option value='100-150'>100m-150m</option>
               <option value='150-300'>150m-300m</option>
@@ -141,7 +141,7 @@ const Browse = () => {
           <div>
             <label htmlFor='rent'>Rent price</label>
             <select className='input' id='rent' name='rent' value={rent} onChange={(e) => setRent(e.target.value)}>
-              <option value='' selected>Any</option>
+              <option value=''>Any</option>
               <option value='-400'>less than 400€</option>
               <option value='400-500'>400€-500€</option>
               <option value='500-600'>500€-600€</option>
@@ -157,27 +157,27 @@ const Browse = () => {
           <ul className="services-list">
             <li>
               <input type="checkbox" id="elevator" name="elevator" value={elevator} onChange={(e) => setElevator(e.target.checked)} />
-              <label for="elevator">Elevator</label>
+              <label htmlFor="elevator">Elevator</label>
             </li>
             <li>
               <input type="checkbox" id="electricity" name="electricity" value={electricity} onChange={(e) => setElectricity(e.target.checked)} />
-              <label for="electricity">Electricity</label>
+              <label htmlFor="electricity">Electricity</label>
             </li>
             <li>
               <input type="checkbox" id="water" name="water" value={water} onChange={(e) => setWater(e.target.checked)} />
-              <label for="water">Water</label><br />
+              <label htmlFor="water">Water</label><br />
             </li>
             <li>
               <input type="checkbox" id="parking" name="parking" value={parking} onChange={(e) => setParking(e.target.checked)} />
-              <label for="parking">Parking</label><br />
+              <label htmlFor="parking">Parking</label><br />
             </li>
             <li>
               <input type="checkbox" id="disability" name="disability" value={disability} onChange={(e) => setDisability(e.target.checked)} />
-              <label for="disability">Disability</label><br />
+              <label htmlFor="disability">Disability</label><br />
             </li>
             <li>
               <input type="checkbox" id="internet" name="internet" value={internet} onChange={(e) => setInternet(e.target.checked)} />
-              <label for="internet">Internet</label>
+              <label htmlFor="internet">Internet</label>
             </li>
           </ul>
         </div>
@@ -190,7 +190,7 @@ const Browse = () => {
       {offers ? (
         offers.length > 0 ? (
           <div className="offers">
-            {offers.map((offer) => <Card offer={offer} />)}
+            {offers.map((offer) => <Card key={offer._id} offer={offer} />)}
           </div>
         ) : (
           <p className="offer-message">No offer found matching your criteria</p>
