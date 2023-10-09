@@ -24,7 +24,7 @@ router.post("/filtered", getFiltered);
 router.get("/:id", getDetailsById);
 // DELETE a listing
 router.delete("/:id", generateAuthToken, deleteListing);
-// PUT a listing
-router.put("/:id", generateAuthToken, changeListingDetails);
+// PATCH a listing
+router.patch("/:id", generateAuthToken, changeListingDetails);
 
 module.exports = router;

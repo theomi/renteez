@@ -262,13 +262,12 @@ const changeListingDetails = async (req, res) => {
     return res.status(400).json({ error: "No such listing found" });
   }
   try {
-    const oldListing = await Goal.findById(id);
+    const oldListing = await Listing.findById(id);
     if (!oldListing) {
       return res.status(404).json({ error: "Listing not found" });
     }
     const listing = await Listing.findOneAndUpdate({ _id: id }, req.body, {
       new: true,
-      overwrite: true,
     });
     res.status(200).json(listing);
   } catch (err) {
