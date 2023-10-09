@@ -1,4 +1,5 @@
 const Listing = require("../models/listingModel");
+const User = require("../models/userModel")
 const mongoose = require("mongoose");
 
 // Controller methods
@@ -7,17 +8,14 @@ const addListing = async (req, res, next) => {
   const {
     title,
     description,
-    picture1,
-    picture2,
-    picture3,
-    picture4,
-    picture5,
+    picture,
     address,
     postalCode,
     city,
     surface,
     roomCount,
     rent,
+    charges,
     transport,
     elevator,
     internet,
@@ -30,13 +28,14 @@ const addListing = async (req, res, next) => {
   if (
     !title ||
     !description ||
-    !picture1 ||
+    !picture ||
     !address ||
     !postalCode ||
     !city ||
     !surface ||
     !roomCount ||
     !rent ||
+    !charges ||
     !transport ||
     !elevator ||
     !internet ||
@@ -53,17 +52,14 @@ const addListing = async (req, res, next) => {
     const listing = await Listing.create({
       title,
       description,
-      picture1,
-      picture2,
-      picture3,
-      picture4,
-      picture5,
+      picture,
       address,
       postalCode,
       city,
       surface,
       roomCount,
       rent,
+      charges,
       transport,
       elevator,
       internet,
@@ -108,7 +104,16 @@ const getDetailsById = async (req, res) => {
     if (!listing) {
       return res.status(404).json({ message: "No such listing found" });
     }
-    res.status(200).json(listing);
+    const user = await User.findById(listing.createdBy);
+    if (user) {
+      const responseListing = {
+        ...listing._doc,
+        createdBy: user.first_name,
+        contactEmail: user.email,
+        contactPhone: user.phone
+      };
+      res.status(200).json(responseListing);
+    }
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

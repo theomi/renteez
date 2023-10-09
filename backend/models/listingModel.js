@@ -12,25 +12,9 @@ const listingSchema = new Schema(
       type: String,
       required: true,
     },
-    picture1: {
+    picture: {
       type: String,
       required: true,
-    },
-    picture2: {
-      type: String,
-      required: false,
-    },
-    picture3: {
-      type: String,
-      required: false,
-    },
-    picture4: {
-      type: String,
-      required: false,
-    },
-    picture5: {
-      type: String,
-      required: false,
     },
     address: {
       type: String,
@@ -53,6 +37,10 @@ const listingSchema = new Schema(
       required: true,
     },
     rent: {
+      type: String,
+      required: true,
+    },
+    charges: {
       type: String,
       required: true,
     },
