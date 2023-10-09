@@ -467,3 +467,12 @@ form label {
   color: #000;
   font-weight: normal;
 }
+
+input[type=file] {
+  border: 0.5px solid #c6c6c6;
+  height: 40px;
+  line-height: 40px;
+  width: 100%;
+  border-radius: 5px;
+  padding-left: 8px;
+}

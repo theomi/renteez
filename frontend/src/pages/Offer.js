@@ -54,14 +54,14 @@ const Offer = () => {
           <li>{icon_rooms} {offer.roomCount} rooms</li>
           <li>{icon_transports} ~{offer.transport}m</li>
           <li>{icon_elevator} {offer.elevator ? "yes" : "no"}</li>
-          <li>{icon_internet} {offer.elevator ? "included" : "not included"}</li>
-          <li>{icon_parking} {offer.elevator ? "yes" : "no"}</li>
-          <li>{icon_disability} {offer.elevator ? "adapted" : "unadapted"}</li>
+          <li>{icon_internet} {offer.internet ? "included" : "not included"}</li>
+          <li>{icon_parking} {offer.parking ? "yes" : "no"}</li>
+          <li>{icon_disability} {offer.disability ? "adapted" : "unadapted"}</li>
           <li>{icon_power} {offer.electricity ? "included" : "not included"}</li>
           <li>{icon_water} {offer.water ? "included" : "not included"}</li>
         </ul>
         <p className="offer-text">{offer.description}</p>
-        <h1 className="offer-price mt-32 mb-32">{offer.rent}€/mo  <span className="charges">{offer.charges ? `(excl. ${offer.charges}€ charges)` : "(charges included)"}</span></h1>
+        <h1 className="offer-price mt-32 mb-32">{offer.rent}€/mo  <span className="charges">{offer.charges !== '0' ? `(excl. ${offer.charges}€ charges)` : "(charges included)"}</span></h1>
         <div className="contact-info">
           <h3>Offer published by {icon_user} {offer.createdBy} on {icon_calendar} {offer.createdAt && format(new Date(offer.createdAt), 'dd.MM.yyyy')}</h3>
           <a className="button mt-16 mr-16" href={`mailto:${offer.contactEmail}`}>{icon_envelope} Contact by email</a>

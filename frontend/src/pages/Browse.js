@@ -156,27 +156,27 @@ const Browse = () => {
 
           <ul className="services-list">
             <li>
-              <input type="checkbox" id="elevator" name="elevator" value={elevator} onChange={(e) => setElevator(e.target.checked)} />
+              <input type="checkbox" id="elevator" name="elevator" checked={elevator} onChange={(e) => setElevator(e.target.checked)} />
               <label htmlFor="elevator">Elevator</label>
             </li>
             <li>
-              <input type="checkbox" id="electricity" name="electricity" value={electricity} onChange={(e) => setElectricity(e.target.checked)} />
+              <input type="checkbox" id="electricity" name="electricity" checked={electricity} onChange={(e) => setElectricity(e.target.checked)} />
               <label htmlFor="electricity">Electricity</label>
             </li>
             <li>
-              <input type="checkbox" id="water" name="water" value={water} onChange={(e) => setWater(e.target.checked)} />
+              <input type="checkbox" id="water" name="water" checked={water} onChange={(e) => setWater(e.target.checked)} />
               <label htmlFor="water">Water</label><br />
             </li>
             <li>
-              <input type="checkbox" id="parking" name="parking" value={parking} onChange={(e) => setParking(e.target.checked)} />
+              <input type="checkbox" id="parking" name="parking" checked={parking} onChange={(e) => setParking(e.target.checked)} />
               <label htmlFor="parking">Parking</label><br />
             </li>
             <li>
-              <input type="checkbox" id="disability" name="disability" value={disability} onChange={(e) => setDisability(e.target.checked)} />
+              <input type="checkbox" id="disability" name="disability" checked={disability} onChange={(e) => setDisability(e.target.checked)} />
               <label htmlFor="disability">Disability</label><br />
             </li>
             <li>
-              <input type="checkbox" id="internet" name="internet" value={internet} onChange={(e) => setInternet(e.target.checked)} />
+              <input type="checkbox" id="internet" name="internet" checked={internet} onChange={(e) => setInternet(e.target.checked)} />
               <label htmlFor="internet">Internet</label>
             </li>
           </ul>

@@ -47,7 +47,11 @@ function App() {
             />
             <Route
               path="/create"
-              element={user ? <Create /> : <Navigate to="/login" />}
+              element={user ? <Create action="create" /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/edit/:id"
+              element={user ? <Create action="edit" /> : <Navigate to="/login" />}
             />
             <Route path="*" element={<NotFound />} />
 
