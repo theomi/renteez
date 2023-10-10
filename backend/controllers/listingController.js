@@ -1,5 +1,5 @@
 const Listing = require("../models/listingModel");
-const User = require("../models/userModel")
+const User = require("../models/userModel");
 const mongoose = require("mongoose");
 
 // Controller methods
@@ -36,13 +36,7 @@ const addListing = async (req, res, next) => {
     !roomCount ||
     !rent ||
     !charges ||
-    !transport ||
-    !elevator ||
-    !internet ||
-    !electricity ||
-    !water ||
-    !parking ||
-    !disability
+    !transport
   ) {
     return res
       .status(400)
@@ -110,7 +104,7 @@ const getDetailsById = async (req, res) => {
         ...listing._doc,
         createdBy: user.first_name,
         contactEmail: user.email,
-        contactPhone: user.phone
+        contactPhone: user.phone,
       };
       res.status(200).json(responseListing);
     }
@@ -145,70 +139,70 @@ const getFiltered = async (req, res) => {
       filter.city = city;
     }
     switch (surface) {
-      case '-20':
-        filter.surface = { "$lt": 20 }
+      case "-20":
+        filter.surface = { $lt: 20 };
         break;
-      case '20-40':
-        filter.surface = { "$gte": 20, "$lt": 40 }
+      case "20-40":
+        filter.surface = { $gte: 20, $lt: 40 };
         break;
-      case '40-50':
-        filter.surface = { "$gte": 40, "$lt": 50 }
+      case "40-50":
+        filter.surface = { $gte: 40, $lt: 50 };
         break;
-      case '50-100':
-        filter.surface = { "$gte": 50, "$lt": 100 }
+      case "50-100":
+        filter.surface = { $gte: 50, $lt: 100 };
         break;
-      case '100+':
-        filter.surface = { "$gte": 100 }
+      case "100+":
+        filter.surface = { $gte: 100 };
         break;
     }
     switch (roomCount) {
-      case '1-2':
-        filter.roomCount = { "$gte": 1, "$lte": 2 }
+      case "1-2":
+        filter.roomCount = { $gte: 1, $lte: 2 };
         break;
-      case '2-3':
-        filter.roomCount = { "$gte": 2, "$lte": 3 }
+      case "2-3":
+        filter.roomCount = { $gte: 2, $lte: 3 };
         break;
-      case '3-4':
-        filter.roomCount = { "$gte": 3, "$lte": 4 }
+      case "3-4":
+        filter.roomCount = { $gte: 3, $lte: 4 };
         break;
-      case '4+':
-        filter.roomCount = { "$gt": 4 }
+      case "4+":
+        filter.roomCount = { $gt: 4 };
         break;
     }
 
     switch (rent) {
-      case '-400':
-        filter.rent = { "$lt": 400 }
+      case "-400":
+        filter.rent = { $lt: 400 };
         break;
-      case '400-500':
-        filter.rent = { "$gte": 400, "$lt": 500 }
+      case "400-500":
+        filter.rent = { $gte: 400, $lt: 500 };
         break;
-      case '500-600':
-        filter.rent = { "$gte": 500, "$lt": 600 }
+      case "500-600":
+        filter.rent = { $gte: 500, $lt: 600 };
         break;
-      case '600-700':
-        filter.rent = { "$gte": 600, "$lt": 700 }
+      case "600-700":
+        filter.rent = { $gte: 600, $lt: 700 };
         break;
-      case '700+':
-        filter.rent = { "$gte": 700 }
+      case "700+":
+        filter.rent = { $gte: 700 };
         break;
     }
 
     switch (transport) {
-      case '-100':
-        filter.transport = { "$lt": 100 }
+      case "-100":
+        filter.transport = { $lt: 100 };
         break;
-      case '100-150':
-        filter.transport = { "$gte": 100, "$lt": 150 }
+      case "100-150":
+        filter.transport = { $gte: 100, $lt: 150 };
         break;
-      case '150-300':
-        filter.transport = { "$gte": 150, "$lt": 300 }
+      case "150-300":
+        filter.transport = { $gte: 150, $lt: 300 };
         break;
-      case '300-500':
-        filter.transport = { "$gte": 300, "$lt": 500 }
+      case "300-500":
+        filter.transport = { $gte: 300, $lt: 500 };
         break;
-      case '500+':
-        filter.transport = { "$gte": 500 }
+      case "500+":
+        filter.transport = { $gte: 500 };
         break;
     }
 

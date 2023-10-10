@@ -29,53 +29,53 @@ const listingSchema = new Schema(
       required: true,
     },
     surface: {
-      type: String,
+      type: Number,
       required: true,
     },
     roomCount: {
-      type: String,
+      type: Number,
       required: true,
     },
     rent: {
-      type: String,
+      type: Number,
       required: true,
     },
     charges: {
-      type: String,
+      type: Number,
       required: true,
     },
     transport: {
-      type: String,
+      type: Number,
       required: true,
     },
     //service
     elevator: {
-      type: String,
+      type: Boolean,
       required: true,
     },
     //service
     internet: {
-      type: String,
+      type: Boolean,
       required: true,
     },
     //service
     electricity: {
-      type: String,
+      type: Boolean,
       required: true,
     },
     //service
     water: {
-      type: String,
+      type: Boolean,
       required: true,
     },
     //service
     parking: {
-      type: String,
+      type: Boolean,
       required: true,
     },
     //service
     disability: {
-      type: String,
+      type: Boolean,
       required: true,
     },
     createdBy: {
