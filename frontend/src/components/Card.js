@@ -12,8 +12,9 @@ const icon_delete = <FontAwesomeIcon icon={faTrashCan} />
 
 const Card = ({ offer, editable }) => {
     return (
-        <div className="offer-card">
-            <Link to={`/offer/${offer._id}`}>
+        <Link to={`/offer/${offer._id}`}>
+
+            <div className="offer-card">
 
                 <img className="offer-picture" src={offer.picture ? offer.picture : empty} alt="offer" />
                 <div className="offer-details">
@@ -23,14 +24,15 @@ const Card = ({ offer, editable }) => {
                     <p className="offer-price">{offer.rent}€/mo<br /><span className="charges">{offer.charges !== '0' ? `(excl. ${offer.charges}€ charges)` : "(charges included)"}</span></p>
                     {editable && (
                         <div className="edit-actions">
-                            <Link to={`/edit/${offer._id}`}><button>{icon_edit}</button></Link>
+                            <Link to={`/edit/${offer._id}`}><button className="mr-8">{icon_edit}</button></Link>
                             <Link to={`/delete/${offer._id}`}><button>{icon_delete}</button></Link>
                         </div>
                     )
                     }
                 </div>
-            </Link>
-        </div>
+            </div>
+        </Link>
+
     );
 }
 

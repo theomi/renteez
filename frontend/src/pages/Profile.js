@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import Card from '../components/Card';
 import { useAuthContext } from "../hooks/useAuthContext";
 import useField from "../hooks/useField"
 import loading from '../img/loading.svg'
 import { useProfile } from '../hooks/useProfile'
+import { useOffer } from "../hooks/useOffer"
 import { REACT_APP_API_URL } from '../utils/apiConfig';
 
 const fetchOffersUrl = `${REACT_APP_API_URL}/api/listings/userlistings`;
 const fetchUserInfoUrl = `${REACT_APP_API_URL}/api/user/me`;
 
-const Profile = () => {
+const Profile = (props) => {
   const firstNameInput = useField("text", "John")
   const lastNameInput = useField("text", "Doe")
   const emailInput = useField("email", "john.doe@example.com")
@@ -21,7 +22,12 @@ const Profile = () => {
   const [title, setTitle] = useState(null)
   const [formReady, setFormReady] = useState(false)
   const { user } = useAuthContext()
+  const { action } = props;
+  const { id } = useParams();
   const { editProfile, error, isLoading, success, deleteUser } = useProfile();
+  const { deleteOffer } = useOffer()
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchOffers = async () => {
@@ -34,6 +40,18 @@ const Profile = () => {
 
       if (response.ok) {
         setOffers(json)
+      }
+    }
+
+    if (action) {
+      if (action === "delete") {
+        if (window.confirm("Do you really want to delete this offer ?\nThis action cannot be undone !")) {
+          deleteOffer(id)
+          navigate("/profile")
+        } else {
+          console.log("cancel");
+          navigate("/profile")
+        }
       }
     }
 
@@ -60,7 +78,7 @@ const Profile = () => {
       fetchUserInfo()
 
     }
-  }, [user])
+  }, [user, action])
 
   const handleSubmit = async (e) => {
     e.preventDefault()

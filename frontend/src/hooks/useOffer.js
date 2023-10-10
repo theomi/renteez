@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAuthContext } from './useAuthContext'
 import { REACT_APP_API_URL } from '../utils/apiConfig';
+import { useNavigate } from 'react-router-dom';
 
 
 export const useOffer = () => {
@@ -9,6 +10,7 @@ export const useOffer = () => {
     const [success, setSuccess] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
     const { user } = useAuthContext()
+    const navigate = useNavigate();
 
     const createOffer = async (title, description, address, postalCode, surface, roomCount, transport, rent, charges, picture, city, elevator, electricity, water, parking, disability, internet) => {
         setIsLoading(true)
@@ -33,6 +35,7 @@ export const useOffer = () => {
         if (response.ok) {
             setSuccess("Offer created successfully")
             setIsLoading(false)
+            navigate("/profile")
         }
     }
 
@@ -59,6 +62,7 @@ export const useOffer = () => {
         if (response.ok) {
             setSuccess("Offer edited successfully")
             setIsLoading(false)
+            navigate("/profile")
         }
     }
 
@@ -80,5 +84,32 @@ export const useOffer = () => {
             return json;
         }
     }
-    return { createOffer, getOffer, editOffer, retrieveOfferError, isLoading, error, success }
+
+
+    const deleteOffer = async (id) => {
+        setIsLoading(true)
+        setError(null)
+
+        const response = await fetch(`http://localhost:3001/api/listings/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`,
+            }
+        })
+
+        const json = await response.json()
+
+        if (!response.ok) {
+            setIsLoading(false)
+            setError(json.message)
+        }
+
+        if (response.ok) {
+            setSuccess("Offer created successfully")
+            setIsLoading(false)
+        }
+    }
+
+    return { createOffer, getOffer, deleteOffer, editOffer, retrieveOfferError, isLoading, error, success }
 }

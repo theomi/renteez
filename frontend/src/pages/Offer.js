@@ -24,7 +24,6 @@ const icon_phone = <FontAwesomeIcon icon={faPhone} />
 
 const Offer = () => {
   const { id } = useParams();
-  console.log(id);
   const [offer, setOffer] = useState("")
 
   useEffect(() => {

@@ -53,6 +53,10 @@ function App() {
               path="/edit/:id"
               element={user ? <Create action="edit" /> : <Navigate to="/login" />}
             />
+            <Route
+              path="/delete/:id"
+              element={user ? <Profile action="delete" /> : <Navigate to="/login" />}
+            />
             <Route path="*" element={<NotFound />} />
 
           </Routes>
