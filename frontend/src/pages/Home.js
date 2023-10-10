@@ -1,9 +1,5 @@
 import house from "../img/home-house.png"
 
-import { REACT_APP_API_URL } from '../utils/apiConfig';
-
-const apiUrl = `${REACT_APP_API_URL}/api/blogs`;
-
 const Home = () => {
 
   return (
@@ -15,7 +11,5 @@ const Home = () => {
     </div>
   )
 }
-
-
 
 export default Home

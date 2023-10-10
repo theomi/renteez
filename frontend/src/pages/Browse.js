@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { REACT_APP_API_URL } from '../utils/apiConfig';
 import Card from '../components/Card';
 import loading from '../img/loading.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,9 +6,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 const icon_search = <FontAwesomeIcon icon={faMagnifyingGlass} />
 
-
-
-const apiUrl = `${REACT_APP_API_URL}/api/listings`;
+const apiUrl = `${process.env.REACT_APP_API_URL}/api/listings`;
 
 const Browse = () => {
   const [offers, setOffers] = useState(null)
@@ -46,7 +43,7 @@ const Browse = () => {
       internet,
     };
 
-    const response = await fetch('http://localhost:3001/api/listings/filtered', {
+    const response = await fetch(apiUrl + "/filtered", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)

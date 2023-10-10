@@ -1,11 +1,7 @@
-import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 import logo from "../img/logo.svg"
 import { useLogout } from "../hooks/useLogout"
 import { useAuthContext } from "../hooks/useAuthContext";
-
-import { REACT_APP_API_URL } from '../utils/apiConfig';
-const apiUrl = `${REACT_APP_API_URL}/api/user/me`;
 
 const Navbar = () => {
 

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useAuthContext } from './useAuthContext'
-import { REACT_APP_API_URL } from '../utils/apiConfig';
 import { useNavigate } from 'react-router-dom';
+const apiUrl = `${process.env.REACT_APP_API_URL}/api/listings`;
 
 
 export const useOffer = () => {
@@ -16,7 +16,7 @@ export const useOffer = () => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch('http://localhost:3001/api/listings', {
+        const response = await fetch(apiUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ export const useOffer = () => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch(`http://localhost:3001/api/listings/${id}`, {
+        const response = await fetch(apiUrl + "/" + id, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ export const useOffer = () => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch(`http://localhost:3001/api/listings/${id}`)
+        const response = await fetch(apiUrl + "/" + id)
 
         const json = await response.json()
 
@@ -90,7 +90,7 @@ export const useOffer = () => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch(`http://localhost:3001/api/listings/${id}`, {
+        const response = await fetch(apiUrl + "/" + id, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

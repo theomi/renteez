@@ -1,6 +1,5 @@
 import house from "../img/not-found.jpg"
 
-
 const NotFound = () => {
 
   return (
@@ -11,7 +10,5 @@ const NotFound = () => {
     </div>
   )
 }
-
-
 
 export default NotFound
