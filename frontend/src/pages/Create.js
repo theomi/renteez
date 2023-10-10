@@ -263,27 +263,27 @@ const CreatePage = (props) => {
 
               <ul className="property-details">
                 <li>
-                  <input type="checkbox" id="elevator" name="elevator" defaultChecked={elevator === "true"} onChange={(e) => setElevator(e.target.checked)} />
+                  <input type="checkbox" id="elevator" name="elevator" defaultChecked={elevator} onChange={(e) => setElevator(e.target.checked)} />
                   <label htmlFor="elevator">Elevator</label>
                 </li>
                 <li>
-                  <input type="checkbox" id="electricity" name="electricity" defaultChecked={electricity === "true"} onChange={(e) => setElectricity(e.target.checked)} />
+                  <input type="checkbox" id="electricity" name="electricity" defaultChecked={electricity} onChange={(e) => setElectricity(e.target.checked)} />
                   <label htmlFor="electricity">Electricity</label>
                 </li>
                 <li>
-                  <input type="checkbox" id="water" name="water" defaultChecked={water === "true"} onChange={(e) => setWater(e.target.checked)} />
+                  <input type="checkbox" id="water" name="water" defaultChecked={water} onChange={(e) => setWater(e.target.checked)} />
                   <label htmlFor="water">Water</label><br />
                 </li>
                 <li>
-                  <input type="checkbox" id="parking" name="parking" defaultChecked={parking === "true"} onChange={(e) => setParking(e.target.checked)} />
+                  <input type="checkbox" id="parking" name="parking" defaultChecked={parking} onChange={(e) => setParking(e.target.checked)} />
                   <label htmlFor="parking">Parking</label><br />
                 </li>
                 <li>
-                  <input type="checkbox" id="disability" name="disability" defaultChecked={disability === "true"} onChange={(e) => setDisability(e.target.checked)} />
+                  <input type="checkbox" id="disability" name="disability" defaultChecked={disability} onChange={(e) => setDisability(e.target.checked)} />
                   <label htmlFor="disability">Adapted for the disabled</label><br />
                 </li>
                 <li>
-                  <input type="checkbox" id="internet" name="internet" defaultChecked={internet === "true"} onChange={(e) => setInternet(e.target.checked)} />
+                  <input type="checkbox" id="internet" name="internet" defaultChecked={internet} onChange={(e) => setInternet(e.target.checked)} />
                   <label htmlFor="internet">Internet</label>
                 </li>
               </ul>
