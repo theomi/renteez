@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 import { useLogout } from "./useLogout";
-import { REACT_APP_API_URL } from "../utils/apiConfig";
+const apiUrl = `${process.env.REACT_APP_API_URL}/api/user/me`;
 
 export const useProfile = () => {
   const [error, setError] = useState(null);
@@ -14,7 +14,7 @@ export const useProfile = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch("http://localhost:3001/api/user/me", {
+    const response = await fetch(apiUrl, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -46,7 +46,7 @@ export const useProfile = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch("http://localhost:3001/api/user/me", {
+    const response = await fetch(apiUrl, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

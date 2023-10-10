@@ -1,12 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react"
-import { REACT_APP_API_URL } from '../utils/apiConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot, faRulerCombined, faDoorOpen, faTrain, faElevator, faWifi, faPlug, faSquareParking, faWheelchairMove, faDroplet, faUser, faCalendar, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons'
 import { format } from 'date-fns';
 import empty from '../img/empty.jpg'
 import loading from '../img/loading.svg'
-const apiUrl = `${REACT_APP_API_URL}/api/listings`;
+const apiUrl = `${process.env.REACT_APP_API_URL}/api/listings`;
 const icon_address = <FontAwesomeIcon color="pink" icon={faLocationDot} />
 const icon_rooms = <FontAwesomeIcon icon={faDoorOpen} />
 const icon_transports = <FontAwesomeIcon icon={faTrain} />
@@ -29,7 +28,6 @@ const Offer = () => {
   useEffect(() => {
     const fetchOffer = async () => {
       const response = await fetch(`${apiUrl}/${id}`)
-      console.log(`${apiUrl}/${id}`);
       const json = await response.json()
 
       if (response.ok) {
@@ -52,12 +50,12 @@ const Offer = () => {
           <li>{icon_surface} {offer.surface} m²</li>
           <li>{icon_rooms} {offer.roomCount} rooms</li>
           <li>{icon_transports} ~{offer.transport}m</li>
-          <li>{icon_elevator} {offer.elevator ? "yes" : "no"}</li>
-          <li>{icon_internet} {offer.internet ? "included" : "not included"}</li>
-          <li>{icon_parking} {offer.parking ? "yes" : "no"}</li>
-          <li>{icon_disability} {offer.disability ? "adapted" : "unadapted"}</li>
-          <li>{icon_power} {offer.electricity ? "included" : "not included"}</li>
-          <li>{icon_water} {offer.water ? "included" : "not included"}</li>
+          <li>{icon_elevator} {offer.elevator === "true" ? "yes" : "no"}</li>
+          <li>{icon_internet} {offer.internet === "true" ? "included" : "not included"}</li>
+          <li>{icon_parking} {offer.parking === "true" ? "yes" : "no"}</li>
+          <li>{icon_disability} {offer.disability === "true" ? "adapted" : "unadapted"}</li>
+          <li>{icon_power} {offer.electricity === "true" ? "included" : "not included"}</li>
+          <li>{icon_water} {offer.water === "true" ? "included" : "not included"}</li>
         </ul>
         <p className="offer-text">{offer.description}</p>
         <h1 className="offer-price mt-32 mb-32">{offer.rent}€/mo  <span className="charges">{offer.charges !== '0' ? `(excl. ${offer.charges}€ charges)` : "(charges included)"}</span></h1>

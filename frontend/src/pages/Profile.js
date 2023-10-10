@@ -6,10 +6,9 @@ import useField from "../hooks/useField"
 import loading from '../img/loading.svg'
 import { useProfile } from '../hooks/useProfile'
 import { useOffer } from "../hooks/useOffer"
-import { REACT_APP_API_URL } from '../utils/apiConfig';
 
-const fetchOffersUrl = `${REACT_APP_API_URL}/api/listings/userlistings`;
-const fetchUserInfoUrl = `${REACT_APP_API_URL}/api/user/me`;
+const fetchOffersUrl = `${process.env.REACT_APP_API_URL}/api/listings/userlistings`;
+const fetchUserInfoUrl = `${process.env.REACT_APP_API_URL}/api/user/me`;
 
 const Profile = (props) => {
   const firstNameInput = useField("text", "John")
@@ -27,7 +26,6 @@ const Profile = (props) => {
   const { editProfile, error, isLoading, success, deleteUser } = useProfile();
   const { deleteOffer } = useOffer()
   const navigate = useNavigate();
-
 
   useEffect(() => {
     const fetchOffers = async () => {

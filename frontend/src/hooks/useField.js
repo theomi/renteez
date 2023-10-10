@@ -1,4 +1,3 @@
-// useField.js
 import { useState } from "react";
 
 const useField = (type, placeholder) => {
