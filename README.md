@@ -1,28 +1,29 @@
-# Renteez
+<div align="center">
 
-## Online Apartment Renting Platform
+<img style="width: 480px" src="./prototype/logo.png">
 
-Team #12 - Web Project - Metropolia University
+Quick and easy platform for renting flats in the Helsinki area<br>
+<a target="_blank" href="https://renteez.onrender.com">renteez.onrender.com</a>
+</div>
 
----
+### Context
 
-### Members
+This project was carried out as part of the Web Project course at the Metropolia University of Applied Sciences in Finland.
 
-Yadullah Abdul Sattar,  Agrin Sadon, Mohammed Sadik Aziz, Theo Mirabile (team leader)
+### Authors
 
----
+* Yadullah Abdul Sattar
+* Agrin Sadon
+* Mohammed Sadik Aziz
+* Theo Mirabile (team leader)
 
 ### Description
 
 The purpose of this project is to develop an online platform to publish appartment rent offers for students in Finland (for now, could be expanded to wider area later). It would help students that didn't got an apartment from regular student apartment providers to get in touch with private people that rent one.
 
----
-
 ### Target Users
 
 As said before, this platform would mainly apply to apartment owners willing to rent it to students, and students themselves looking for an apartment.
-
----
 
 ### Other stakeholders
 
@@ -34,8 +35,6 @@ As said before, this platform would mainly apply to apartment owners willing to 
 
 * **The users would be warned that the platform doesn't take legal responsability in any dispute.**
 
----
-
 ### Main functionality
 
 * Search apartments by city, surface, rooms count, included services (water, power, internet, sauna), location (close to public transports) rent price, etc.
@@ -45,8 +44,6 @@ As said before, this platform would mainly apply to apartment owners willing to 
 * Contact an apartment owner (by mail or phone, up to the landlord)
 
 * Create a user account (tenant or landlord)
-
----
 
 ### User Stories
 
@@ -67,8 +64,6 @@ As said before, this platform would mainly apply to apartment owners willing to 
 * As a user, I want to be able to create an account on the platform and fill up my profile info
 
 * As a user, I want to be able to come back to the homepage of the website at any time
-
----
 
 ### If time permits
 
