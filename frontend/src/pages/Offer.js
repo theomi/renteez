@@ -58,7 +58,7 @@ const Offer = () => {
           <li>{icon_water} {offer.water ? "included" : "not included"}</li>
         </ul>
         <p className="offer-text">{offer.description}</p>
-        <h1 className="offer-price mt-32 mb-32">{offer.rent}€/mo  <span className="charges">{offer.charges !== '0' ? `(excl. ${offer.charges}€ charges)` : "(charges included)"}</span></h1>
+        <h1 className="offer-price mt-32 mb-32">{offer.rent}€/mo  <span className="charges">{offer.charges ? `(excl. ${offer.charges}€ charges)` : "(charges included)"}</span></h1>
         <div className="contact-info">
           <h3>Offer published by {icon_user} {offer.createdBy} on {icon_calendar} {offer.createdAt && format(new Date(offer.createdAt), 'dd.MM.yyyy')}</h3>
           <a className="button mt-16 mr-16" href={`mailto:${offer.contactEmail}`}>{icon_envelope} Contact by email</a>
