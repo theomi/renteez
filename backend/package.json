@@ -22,6 +22,8 @@
     "mongoose": "^7.5.2",
     "path": "^0.12.7",
     "supertest": "^6.3.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
     "validator": "^13.11.0"
   },
   "devDependencies": {
