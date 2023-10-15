@@ -21,7 +21,7 @@ const Card = ({ offer, editable }) => {
                     <h3>{offer.title}</h3>
                     <p className="offer-address">{icon_address} {offer.address}, {offer.city}</p>
                     <p className="offer-infos">{icon_surface} {offer.surface} m²{icon_rooms} {offer.roomCount} rooms {icon_transports} ~{offer.transport}m</p>
-                    <p className="offer-price">{offer.rent}€/mo<br /><span className="charges">{offer.charges !== '0' ? `(excl. ${offer.charges}€ charges)` : "(charges included)"}</span></p>
+                    <p className="offer-price">{offer.rent}€/mo<br /><span className="charges">{offer.charges ? `(excl. ${offer.charges}€ charges)` : "(charges included)"}</span></p>
                     {editable && (
                         <div className="edit-actions">
                             <Link to={`/edit/${offer._id}`}><button className="mr-8">{icon_edit}</button></Link>
